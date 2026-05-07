@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physicalist Theories of Mind — Study Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f0e0c; --bg-2: #161412; --bg-card: #1a1815; --bg-elev: #221f1a;
+  --gold: #c9a96e; --gold-bright: #e8c285; --gold-dim: #8a7548; --gold-faint: rgba(201, 169, 110, 0.15);
+  --text: #ece7dd; --text-dim: #9a9285; --text-faint: #5d564c;
+  --border: rgba(201, 169, 110, 0.18); --border-strong: rgba(201, 169, 110, 0.4);
+  --red: #c66651; --green: #7a9c6c;
+  --serif: 'Cormorant Garamond', Georgia, serif; --sans: 'DM Sans', system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 15px; line-height: 1.6; overflow: hidden; -webkit-font-smoothing: antialiased; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--gold-faint); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold-dim); }
+
+.app { display: grid; grid-template-columns: 280px 1fr; height: 100vh; }
+.sidebar { background: var(--bg-2); border-right: 1px solid var(--border); padding: 36px 28px; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; }
+.sidebar-brand { font-family: var(--serif); font-size: 22px; line-height: 1.2; font-weight: 500; color: var(--gold); letter-spacing: 0.01em; margin-bottom: 4px; }
+.sidebar-sub { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--text-dim); margin-bottom: 36px; letter-spacing: 0.02em; }
+.sidebar-divider { height: 1px; background: var(--border); margin: 8px 0 20px; }
+.sidebar-label { font-size: 10px; letter-spacing: 0.18em; color: var(--text-faint); text-transform: uppercase; margin-bottom: 12px; }
+.nav-btn { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; background: transparent; border: 1px solid transparent; color: var(--text-dim); font-family: var(--sans); font-size: 14px; padding: 12px 14px; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; letter-spacing: 0.02em; }
+.nav-btn:hover { color: var(--gold); background: var(--gold-faint); }
+.nav-btn.active { color: var(--gold); background: var(--gold-faint); border-color: var(--border-strong); }
+.nav-btn .num { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--gold-dim); width: 20px; }
+.nav-btn.active .num { color: var(--gold); }
+.sidebar-footer { margin-top: auto; padding-top: 28px; font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--text-faint); line-height: 1.5; }
+
+.main { overflow-y: auto; position: relative; }
+.panel { display: none; padding: 56px 64px 80px; max-width: 1400px; }
+.panel.active { display: block; }
+.panel-header { margin-bottom: 48px; border-bottom: 1px solid var(--border); padding-bottom: 28px; }
+.panel-eyebrow { font-size: 11px; letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase; margin-bottom: 12px; }
+.panel-title { font-family: var(--serif); font-size: 52px; font-weight: 500; line-height: 1.05; letter-spacing: -0.01em; color: var(--text); margin-bottom: 14px; }
+.panel-desc { font-family: var(--serif); font-style: italic; font-size: 19px; color: var(--text-dim); max-width: 720px; line-height: 1.4; }
+
+.overview-intro { background: var(--bg-card); border: 1px solid var(--border); padding: 32px 36px; border-radius: 4px; margin-bottom: 40px; }
+.overview-intro h3 { font-family: var(--serif); font-size: 26px; font-weight: 500; color: var(--gold); margin-bottom: 12px; }
+.overview-intro p { font-family: var(--serif); font-size: 17px; line-height: 1.55; color: var(--text-dim); }
+.overview-intro p + p { margin-top: 12px; }
+.overview-intro strong { color: var(--text); font-weight: 500; }
+.overview-intro em { color: var(--gold-bright); font-style: italic; }
+
+.lesson-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
+.lesson-card { background: var(--bg-card); border: 1px solid var(--border); padding: 26px; border-radius: 4px; cursor: pointer; transition: all 0.25s ease; position: relative; overflow: hidden; }
+.lesson-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--gold); transform: translateX(-3px); transition: transform 0.25s ease; }
+.lesson-card:hover { border-color: var(--border-strong); background: var(--bg-elev); transform: translateY(-2px); }
+.lesson-card:hover::before { transform: translateX(0); }
+.lesson-card .num { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--gold); margin-bottom: 8px; letter-spacing: 0.05em; }
+.lesson-card .title { font-family: var(--serif); font-size: 22px; font-weight: 500; color: var(--text); line-height: 1.2; margin-bottom: 8px; }
+.lesson-card .blurb { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+.lesson-card .topic-tag { display: inline-block; margin-top: 14px; font-size: 10px; letter-spacing: 0.15em; color: var(--gold-dim); text-transform: uppercase; padding: 3px 8px; border: 1px solid var(--border); border-radius: 2px; }
+
+.lesson-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; gap: 16px; }
+.lesson-counter { font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--text-dim); }
+.lesson-arrows { display: flex; gap: 8px; }
+.arrow-btn { background: transparent; border: 1px solid var(--border); color: var(--gold); width: 36px; height: 36px; border-radius: 4px; cursor: pointer; font-size: 16px; transition: all 0.2s; }
+.arrow-btn:hover:not(:disabled) { background: var(--gold-faint); border-color: var(--gold); }
+.arrow-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.lesson-content { display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; align-items: start; }
+.lesson-diagram { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 32px; min-height: 480px; display: flex; align-items: center; justify-content: center; }
+.lesson-diagram svg { width: 100%; height: auto; max-height: 540px; }
+.lesson-side h2 { font-family: var(--serif); font-size: 36px; font-weight: 500; line-height: 1.1; color: var(--text); margin-bottom: 8px; letter-spacing: -0.005em; }
+.lesson-side .lesson-eyebrow { font-size: 11px; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 14px; }
+.lesson-bullets { list-style: none; margin-top: 28px; }
+.lesson-bullets li { padding: 12px 0 12px 22px; border-bottom: 1px solid var(--border); font-size: 14.5px; line-height: 1.55; color: var(--text); position: relative; }
+.lesson-bullets li::before { content: ''; position: absolute; left: 0; top: 21px; width: 8px; height: 1px; background: var(--gold); }
+.lesson-bullets li strong { color: var(--gold); font-weight: 500; }
+.lesson-bullets li em { font-family: var(--serif); font-style: italic; color: var(--gold-bright); }
+.memory-hook { margin-top: 32px; padding: 22px 24px; background: var(--bg-elev); border-left: 2px solid var(--gold); border-radius: 2px; }
+.memory-hook .hook-label { font-size: 10px; letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; }
+.memory-hook p { font-family: var(--serif); font-style: italic; font-size: 17px; line-height: 1.45; color: var(--text); }
+
+.flash-controls { display: flex; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; align-items: center; }
+.filter-btn { background: transparent; border: 1px solid var(--border); color: var(--text-dim); padding: 8px 16px; border-radius: 2px; font-family: var(--sans); font-size: 12px; letter-spacing: 0.05em; cursor: pointer; transition: all 0.2s; }
+.filter-btn:hover { color: var(--gold); border-color: var(--border-strong); }
+.filter-btn.active { color: var(--gold); border-color: var(--gold); background: var(--gold-faint); }
+.action-btn { background: var(--gold); border: 1px solid var(--gold); color: var(--bg); padding: 8px 18px; border-radius: 2px; font-family: var(--sans); font-size: 12px; letter-spacing: 0.05em; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+.action-btn:hover { background: var(--gold-bright); border-color: var(--gold-bright); }
+.action-btn.ghost { background: transparent; color: var(--gold); }
+.action-btn.ghost:hover { background: var(--gold-faint); }
+.flash-progress { margin-left: auto; font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--text-dim); }
+
+.flash-stage { display: flex; justify-content: center; align-items: center; min-height: 420px; margin-bottom: 24px; }
+.flashcard { width: 100%; max-width: 700px; height: 380px; perspective: 1500px; cursor: pointer; }
+.flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; }
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flash-face { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 50px 56px; display: flex; flex-direction: column; justify-content: center; }
+.flash-face.back { background: var(--bg-elev); border-color: var(--gold-dim); transform: rotateY(180deg); }
+.flash-tag { position: absolute; top: 22px; left: 26px; font-size: 10px; letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase; }
+.flash-side { position: absolute; top: 22px; right: 26px; font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--text-faint); }
+.flash-num { position: absolute; bottom: 22px; right: 26px; font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--text-faint); }
+.flash-q { font-family: var(--serif); font-size: 26px; line-height: 1.3; color: var(--text); text-align: center; font-weight: 400; }
+.flash-a { font-family: var(--serif); font-size: 19px; line-height: 1.5; color: var(--text); text-align: center; font-weight: 400; }
+.flash-a strong { color: var(--gold); font-weight: 500; }
+.flash-a em { font-style: italic; color: var(--gold-bright); }
+.flash-controls-bottom { display: flex; justify-content: center; gap: 12px; }
+
+.mcq-container { max-width: 820px; }
+.mcq-progress-bar { height: 2px; background: var(--border); margin-bottom: 28px; border-radius: 1px; overflow: hidden; }
+.mcq-progress-fill { height: 100%; background: var(--gold); transition: width 0.4s ease; }
+.mcq-meta { display: flex; justify-content: space-between; font-size: 12px; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 18px; text-transform: uppercase; }
+.mcq-meta .score { color: var(--gold); }
+.mcq-question { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 36px 40px; margin-bottom: 24px; }
+.mcq-q-text { font-family: var(--serif); font-size: 24px; line-height: 1.3; color: var(--text); margin-bottom: 28px; font-weight: 400; }
+.mcq-options { display: flex; flex-direction: column; gap: 10px; }
+.mcq-option { background: var(--bg-elev); border: 1px solid var(--border); color: var(--text); text-align: left; padding: 14px 20px; font-family: var(--sans); font-size: 14.5px; border-radius: 3px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 14px; line-height: 1.45; }
+.mcq-option:hover:not(:disabled) { border-color: var(--gold); background: var(--gold-faint); }
+.mcq-option .letter { font-family: var(--serif); font-style: italic; color: var(--gold); font-size: 16px; flex-shrink: 0; width: 20px; }
+.mcq-option.correct { background: rgba(122, 156, 108, 0.15); border-color: var(--green); color: var(--text); }
+.mcq-option.correct .letter { color: var(--green); }
+.mcq-option.incorrect { background: rgba(198, 102, 81, 0.12); border-color: var(--red); }
+.mcq-option.incorrect .letter { color: var(--red); }
+.mcq-option:disabled { cursor: default; }
+.mcq-feedback { margin-top: 20px; padding: 18px 22px; border-radius: 3px; font-family: var(--serif); font-size: 16px; line-height: 1.5; color: var(--text); display: none; }
+.mcq-feedback.show { display: block; }
+.mcq-feedback.correct { background: rgba(122, 156, 108, 0.1); border-left: 2px solid var(--green); }
+.mcq-feedback.incorrect { background: rgba(198, 102, 81, 0.1); border-left: 2px solid var(--red); }
+.mcq-feedback .verdict { font-family: var(--sans); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
+.mcq-feedback.correct .verdict { color: var(--green); }
+.mcq-feedback.incorrect .verdict { color: var(--red); }
+.mcq-feedback strong { color: var(--gold); font-weight: 500; }
+.mcq-feedback em { color: var(--gold-bright); font-style: italic; }
+.mcq-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+.mcq-summary { background: var(--bg-card); border: 1px solid var(--border); padding: 48px; border-radius: 4px; text-align: center; }
+.mcq-summary h3 { font-family: var(--serif); font-size: 36px; color: var(--gold); margin-bottom: 12px; font-weight: 500; }
+.mcq-summary .score-num { font-family: var(--serif); font-size: 72px; color: var(--text); font-weight: 500; margin: 18px 0 8px; }
+.mcq-summary .score-num span { color: var(--text-faint); font-size: 48px; }
+.mcq-summary p { font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--text-dim); margin-bottom: 28px; }
+
+.dx-stroke { stroke: #c9a96e; fill: none; }
+.dx-stroke-dim { stroke: #8a7548; fill: none; }
+.dx-fill-gold { fill: #c9a96e; }
+.dx-fill-text { fill: #ece7dd; }
+.dx-fill-dim { fill: #9a9285; }
+.dx-fill-faint { fill: #5d564c; }
+.dx-label { font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.05em; }
+.dx-label-sm { font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.08em; }
+.dx-title { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; }
+.dx-eyebrow { font-family: 'DM Sans', sans-serif; font-size: 8.5px; letter-spacing: 0.22em; text-transform: uppercase; }
+
+@media (max-width: 1100px) { .lesson-content { grid-template-columns: 1fr; } .panel { padding: 40px 32px; } }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="sidebar-brand">Physicalist Theories of Mind</div>
+    <div class="sidebar-sub">Westphal, Chapter 3 — Study Platform</div>
+    <div class="sidebar-label">Sections</div>
+    <button class="nav-btn active" data-panel="overview"><span class="num">I</span><span>Overview</span></button>
+    <button class="nav-btn" data-panel="lessons"><span class="num">II</span><span>Lessons</span></button>
+    <button class="nav-btn" data-panel="flashcards"><span class="num">III</span><span>Flashcards</span></button>
+    <button class="nav-btn" data-panel="mcq"><span class="num">IV</span><span>MCQ Practice</span></button>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-label">Theories Covered</div>
+    <div style="font-family: var(--serif); font-size: 14.5px; color: var(--text-dim); line-height: 1.85; padding: 0 4px;">
+      Behaviorism<br>Identity Theory<br>Functionalism<br>Anomalous Monism<br>Eliminativism
+    </div>
+    <div class="sidebar-footer">
+      "The clear success of a solution seems to stand in inverse relationship to its believability."
+      <div style="margin-top: 10px; font-style: normal; font-size: 11px; letter-spacing: 0.1em; color: var(--gold-dim);">— J. WESTPHAL</div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <section class="panel active" id="panel-overview">
+      <div class="panel-header">
+        <div class="panel-eyebrow">Chapter 3 · Westphal 2016</div>
+        <h1 class="panel-title">Physicalist Theories of Mind</h1>
+        <p class="panel-desc">Five attempts to dissolve the mind–body problem by denying that the mind is a nonphysical thing — and the persistent puzzles each one leaves behind.</p>
+      </div>
+      <div class="overview-intro">
+        <h3>The physicalist move</h3>
+        <p>Dualism faces the interaction problem: how can a nonphysical mind affect a physical body? <strong>Physicalism</strong> dissolves this at a stroke by denying proposition <em>(1)</em> — the claim that the mind is a nonphysical thing. If everything is physical, the mind interacts with the body without difficulty.</p>
+        <p>But <em>in what way</em> is the mind physical? Five answers compete: <strong>behaviorism</strong> (mind is behavior), <strong>identity theory</strong> (mind is brain), <strong>functionalism</strong> (mind is computational role), <strong>anomalous monism</strong> (mental descriptions are irreducible though events are physical), and <strong>eliminativism</strong> (there is no mind at all).</p>
+      </div>
+      <div class="lesson-grid" id="overview-grid"></div>
+    </section>
+
+    <section class="panel" id="panel-lessons">
+      <div class="panel-header">
+        <div class="panel-eyebrow">Section II · Visual Lessons</div>
+        <h1 class="panel-title" id="lesson-title-display">Loading…</h1>
+        <p class="panel-desc" id="lesson-subtitle-display"></p>
+      </div>
+      <div class="lesson-nav">
+        <span class="lesson-counter" id="lesson-counter">Lesson 1 of 14</span>
+        <div class="lesson-arrows">
+          <button class="arrow-btn" id="prev-lesson">←</button>
+          <button class="arrow-btn" id="next-lesson">→</button>
+        </div>
+      </div>
+      <div class="lesson-content" id="lesson-content"></div>
+    </section>
+
+    <section class="panel" id="panel-flashcards">
+      <div class="panel-header">
+        <div class="panel-eyebrow">Section III · Recall Practice</div>
+        <h1 class="panel-title">Flashcards</h1>
+        <p class="panel-desc">32 flip cards across all five theories. Click the card to reveal. Filter by topic, shuffle the deck, or reset to start over.</p>
+      </div>
+      <div class="flash-controls" id="flash-filters"></div>
+      <div class="flash-controls">
+        <button class="action-btn" id="shuffle-btn">⇄ Shuffle</button>
+        <button class="action-btn ghost" id="reset-btn">↺ Reset</button>
+        <span class="flash-progress" id="flash-progress">Card 1 of 32</span>
+      </div>
+      <div class="flash-stage">
+        <div class="flashcard" id="flashcard">
+          <div class="flashcard-inner">
+            <div class="flash-face front">
+              <div class="flash-tag" id="flash-tag-front">BEHAVIORISM</div>
+              <div class="flash-side">QUESTION</div>
+              <div class="flash-q" id="flash-q">Loading…</div>
+              <div class="flash-num" id="flash-num-front">1 / 32</div>
+            </div>
+            <div class="flash-face back">
+              <div class="flash-tag" id="flash-tag-back">BEHAVIORISM</div>
+              <div class="flash-side">ANSWER</div>
+              <div class="flash-a" id="flash-a"></div>
+              <div class="flash-num" id="flash-num-back">1 / 32</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flash-controls-bottom">
+        <button class="arrow-btn" id="flash-prev" style="width: 48px;">←</button>
+        <button class="action-btn ghost" id="flash-flip">Flip</button>
+        <button class="arrow-btn" id="flash-next" style="width: 48px;">→</button>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-mcq">
+      <div class="panel-header">
+        <div class="panel-eyebrow">Section IV · Exam Practice</div>
+        <h1 class="panel-title">Multiple-Choice Questions</h1>
+        <p class="panel-desc">20 exam-style questions covering every major theory and argument. Immediate feedback with explanations.</p>
+      </div>
+      <div class="mcq-container" id="mcq-container">
+        <div class="mcq-progress-bar"><div class="mcq-progress-fill" id="mcq-progress-fill"></div></div>
+        <div class="mcq-meta">
+          <span id="mcq-counter">Question 1 of 20</span>
+          <span class="score" id="mcq-score">Score: 0 / 0</span>
+        </div>
+        <div id="mcq-stage"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+const LESSONS = [
+  {
+    id: 1,
+    eyebrow: 'Lesson 01 — The Physicalist Move',
+    title: 'Denying the nonphysical mind',
+    subtitle: 'How physicalism dissolves the mind–body problem at a stroke — and the four physicalist branches that follow.',
+    bullets: [
+      '<strong>Dualism\'s problem:</strong> if mind is nonphysical and body physical, how do they interact?',
+      'Physicalism solves this by <em>denying proposition (1)</em>: there are no nonphysical things, so there is no interaction problem.',
+      'But the question becomes: <em>in what way</em> is the mind physical?',
+      'Four answers historically compete: behavior, brain, function, or eliminate the question.',
+      'Each pays a price — the more cleanly it solves the problem, the harder it becomes to believe.'
+    ],
+    hook: 'Physicalism is a single sentence with five different translations.',
+    diagram: `<svg viewBox="0 0 720 500" xmlns="http://www.w3.org/2000/svg">
+<text x="360" y="32" text-anchor="middle" class="dx-eyebrow dx-fill-faint">THE MIND–BODY PROBLEM</text>
+<rect x="180" y="55" width="360" height="60" rx="2" class="dx-stroke" stroke-width="1.2"/>
+<text x="360" y="80" text-anchor="middle" class="dx-title dx-fill-dim">Prop (1): The mind is a</text>
+<text x="360" y="100" text-anchor="middle" class="dx-title dx-fill-dim">nonphysical thing</text>
+<line x1="195" y1="85" x2="525" y2="85" stroke="#c66651" stroke-width="1.5"/>
+<text x="555" y="92" class="dx-label dx-fill-gold">DENIED</text>
+<line x1="360" y1="125" x2="360" y2="160" class="dx-stroke-dim" stroke-width="1" stroke-dasharray="3 3"/>
+<polygon points="360,165 355,156 365,156" class="dx-fill-gold"/>
+<circle cx="360" cy="195" r="36" class="dx-stroke" stroke-width="1.5" fill="#1a1815"/>
+<text x="360" y="192" text-anchor="middle" class="dx-title dx-fill-gold" font-size="13">PHYSICALISM</text>
+<text x="360" y="207" text-anchor="middle" class="dx-label-sm dx-fill-dim">all is physical</text>
+<line x1="360" y1="231" x2="100" y2="305" class="dx-stroke-dim" stroke-width="1"/>
+<line x1="360" y1="231" x2="265" y2="305" class="dx-stroke-dim" stroke-width="1"/>
+<line x1="360" y1="231" x2="455" y2="305" class="dx-stroke-dim" stroke-width="1"/>
+<line x1="360" y1="231" x2="620" y2="305" class="dx-stroke-dim" stroke-width="1"/>
+<rect x="20" y="305" width="160" height="80" rx="2" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="100" y="328" text-anchor="middle" class="dx-title dx-fill-gold" font-size="13">Behaviorism</text>
+<text x="100" y="350" text-anchor="middle" class="dx-label dx-fill-dim">mind is</text>
+<text x="100" y="368" text-anchor="middle" class="dx-label dx-fill-text">behavior</text>
+<rect x="185" y="305" width="160" height="80" rx="2" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="265" y="328" text-anchor="middle" class="dx-title dx-fill-gold" font-size="13">Identity Theory</text>
+<text x="265" y="350" text-anchor="middle" class="dx-label dx-fill-dim">mind is</text>
+<text x="265" y="368" text-anchor="middle" class="dx-label dx-fill-text">brain</text>
+<rect x="375" y="305" width="160" height="80" rx="2" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="455" y="328" text-anchor="middle" class="dx-title dx-fill-gold" font-size="13">Functionalism</text>
+<text x="455" y="350" text-anchor="middle" class="dx-label dx-fill-dim">mind is</text>
+<text x="455" y="368" text-anchor="middle" class="dx-label dx-fill-text">software / role</text>
+<rect x="540" y="305" width="160" height="80" rx="2" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="620" y="328" text-anchor="middle" class="dx-title dx-fill-gold" font-size="13">Eliminativism</text>
+<text x="620" y="350" text-anchor="middle" class="dx-label dx-fill-dim">there is no</text>
+<text x="620" y="368" text-anchor="middle" class="dx-label dx-fill-text">mind at all</text>
+<rect x="240" y="415" width="240" height="62" rx="2" class="dx-stroke-dim" stroke-width="1" stroke-dasharray="4 3" fill="#1a1815"/>
+<text x="360" y="438" text-anchor="middle" class="dx-title dx-fill-gold" font-size="13">Anomalous Monism</text>
+<text x="360" y="458" text-anchor="middle" class="dx-label dx-fill-dim">events physical, descriptions not</text>
+<line x1="360" y1="385" x2="360" y2="415" class="dx-stroke-dim" stroke-width="0.8" stroke-dasharray="2 3"/>
+</svg>`
+  },
+  {
+    id: 2,
+    eyebrow: 'Lesson 02 — Behaviorism',
+    title: 'Four forms of behaviorism',
+    subtitle: 'A spectrum from radical denial of the mind to a sophisticated translation of mental talk into behavioral talk.',
+    bullets: [
+      '<strong>Form 1 (hardline):</strong> there is <em>no mind</em>, only behavior. Most extreme.',
+      '<strong>Form 2 (methodological):</strong> mind exists but cannot be directly observed, so science should ignore it.',
+      '<strong>Form 3 (replacement):</strong> mind is uninteresting; replace its study with behavior.',
+      '<strong>Form 4 (translation):</strong> every mental sentence translates into a sentence about behavioral dispositions.',
+      'Form 4 is the most defensible — and the version most associated with <em>Gilbert Ryle</em>.'
+    ],
+    hook: 'From "the mind doesn\'t exist" to "mental talk is just disposition talk" — four steps of retreat.',
+    diagram: `<svg viewBox="0 0 720 540" xmlns="http://www.w3.org/2000/svg">
+<text x="360" y="28" text-anchor="middle" class="dx-eyebrow dx-fill-faint">A SPECTRUM OF BEHAVIORISMS · MOST RADICAL → MOST MODERATE</text>
+<line x1="80" y1="60" x2="80" y2="500" class="dx-stroke-dim" stroke-width="1"/>
+<text x="60" y="70" class="dx-label-sm dx-fill-faint" transform="rotate(-90 60 70)">RADICAL</text>
+<text x="60" y="500" class="dx-label-sm dx-fill-faint" transform="rotate(-90 60 500)">MODERATE</text>
+<line x1="80" y1="100" x2="120" y2="100" class="dx-stroke" stroke-width="1"/>
+<rect x="125" y="75" width="540" height="55" rx="2" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="142" y="100" class="dx-title dx-fill-gold" font-size="14">FORM 1</text>
+<text x="220" y="100" class="dx-label dx-fill-text" font-size="13">Hardline · "There is no mind."</text>
+<text x="142" y="120" class="dx-label-sm dx-fill-dim">Denies mental events outright. Almost no philosopher holds this today.</text>
+<line x1="80" y1="180" x2="120" y2="180" class="dx-stroke" stroke-width="1"/>
+<rect x="125" y="155" width="540" height="55" rx="2" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="142" y="180" class="dx-title dx-fill-gold" font-size="14">FORM 2</text>
+<text x="220" y="180" class="dx-label dx-fill-text" font-size="13">Methodological · "Don't study what can't be observed."</text>
+<text x="142" y="200" class="dx-label-sm dx-fill-dim">Weak: science studies many unobservables (electricity, fields, atoms).</text>
+<line x1="80" y1="260" x2="120" y2="260" class="dx-stroke" stroke-width="1"/>
+<rect x="125" y="235" width="540" height="55" rx="2" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="142" y="260" class="dx-title dx-fill-gold" font-size="14">FORM 3</text>
+<text x="220" y="260" class="dx-label dx-fill-text" font-size="13">Replacement · "Mind is not interesting; study behavior instead."</text>
+<text x="142" y="280" class="dx-label-sm dx-fill-dim">Cannot even state the mind–body problem. Avoids it rather than solves it.</text>
+<line x1="80" y1="340" x2="120" y2="340" class="dx-stroke" stroke-width="1.5"/>
+<rect x="125" y="315" width="540" height="55" rx="2" class="dx-stroke" stroke-width="1.8" fill="#221f1a"/>
+<text x="142" y="340" class="dx-title dx-fill-gold" font-size="14">FORM 4</text>
+<text x="220" y="340" class="dx-label dx-fill-text" font-size="13">Translation · "Mental sentences = sentences about behavior."</text>
+<text x="142" y="360" class="dx-label-sm dx-fill-dim">Most defensible. "I am tired" = a disposition to lie down, rest, etc. (Ryle 1949)</text>
+<rect x="125" y="400" width="540" height="100" rx="2" stroke="#c9a96e" stroke-width="0.8" fill="#221f1a"/>
+<text x="145" y="424" class="dx-eyebrow dx-fill-gold">GILBERT RYLE · THE CONCEPT OF MIND, 1949</text>
+<text x="145" y="450" class="dx-title dx-fill-text" font-size="14" font-style="italic">"...we are not referring to occult episodes</text>
+<text x="145" y="471" class="dx-title dx-fill-text" font-size="14" font-style="italic">of which their overt acts and utterances</text>
+<text x="145" y="492" class="dx-title dx-fill-text" font-size="14" font-style="italic">are effects; we are referring to those</text>
+<text x="145" y="513" class="dx-title dx-fill-text" font-size="14" font-style="italic">overt acts and utterances themselves."</text>
+</svg>`
+  },
+  {
+    id: 3,
+    eyebrow: 'Lesson 03 — Ryle\'s Translation View',
+    title: '"I am tired" — what does it really say?',
+    subtitle: 'Logical behaviorism translates mental reports into clusters of behavioral dispositions, not reports of inner episodes.',
+    bullets: [
+      '<strong>Translation thesis:</strong> "I am tired" does not report a private inner feeling.',
+      'It reports a <em>cluster of dispositions</em>: to stop work, lie down, close eyes, rest.',
+      'These dispositions are public, observable, and within the reach of science.',
+      'Ryle says we are <em>not referring to</em> inner episodes — but he need not deny they <em>exist</em>.',
+      'Ryle himself: "one of my feet was pretty firmly encased in this boot."'
+    ],
+    hook: 'Mental words are not labels for inner pictures — they are tickets for behavior bundles.',
+    diagram: `<svg viewBox="0 0 720 500" xmlns="http://www.w3.org/2000/svg">
+<text x="360" y="28" text-anchor="middle" class="dx-eyebrow dx-fill-faint">RYLE'S TRANSLATION ANALYSIS</text>
+<rect x="240" y="55" width="240" height="64" rx="2" class="dx-stroke" stroke-width="1.5" fill="#221f1a"/>
+<text x="360" y="80" text-anchor="middle" class="dx-title dx-fill-gold" font-size="13" font-style="italic">"I am tired."</text>
+<text x="360" y="100" text-anchor="middle" class="dx-label-sm dx-fill-dim">a mental report</text>
+<line x1="320" y1="125" x2="180" y2="180" class="dx-stroke-dim" stroke-width="1"/>
+<line x1="400" y1="125" x2="540" y2="180" class="dx-stroke" stroke-width="1.2"/>
+<text x="220" y="155" class="dx-label-sm dx-fill-faint">DUALIST READING</text>
+<text x="500" y="155" class="dx-label-sm dx-fill-gold">RYLE'S READING</text>
+<ellipse cx="155" cy="240" rx="110" ry="55" class="dx-stroke-dim" stroke-width="1" stroke-dasharray="4 3" fill="#1a1815"/>
+<text x="155" y="232" text-anchor="middle" class="dx-title dx-fill-dim" font-size="13" font-style="italic">private inner</text>
+<text x="155" y="252" text-anchor="middle" class="dx-title dx-fill-dim" font-size="13" font-style="italic">feeling of</text>
+<text x="155" y="272" text-anchor="middle" class="dx-title dx-fill-dim" font-size="13" font-style="italic">drowsiness</text>
+<line x1="60" y1="200" x2="250" y2="285" stroke="#c66651" stroke-width="1.5"/>
+<text x="155" y="318" text-anchor="middle" class="dx-label-sm" fill="#c66651">NOT WHAT WE REFER TO</text>
+<text x="565" y="225" text-anchor="middle" class="dx-eyebrow dx-fill-gold">A CLUSTER OF DISPOSITIONS</text>
+<rect x="445" y="240" width="115" height="34" rx="2" class="dx-stroke" stroke-width="0.8" fill="#1a1815"/>
+<text x="502" y="261" text-anchor="middle" class="dx-label dx-fill-text" font-size="11">stop working</text>
+<rect x="565" y="240" width="115" height="34" rx="2" class="dx-stroke" stroke-width="0.8" fill="#1a1815"/>
+<text x="622" y="261" text-anchor="middle" class="dx-label dx-fill-text" font-size="11">lie down</text>
+<rect x="445" y="280" width="115" height="34" rx="2" class="dx-stroke" stroke-width="0.8" fill="#1a1815"/>
+<text x="502" y="301" text-anchor="middle" class="dx-label dx-fill-text" font-size="11">close eyes</text>
+<rect x="565" y="280" width="115" height="34" rx="2" class="dx-stroke" stroke-width="0.8" fill="#1a1815"/>
+<text x="622" y="301" text-anchor="middle" class="dx-label dx-fill-text" font-size="11">rest</text>
+<rect x="505" y="320" width="115" height="34" rx="2" class="dx-stroke" stroke-width="0.8" fill="#1a1815"/>
+<text x="562" y="341" text-anchor="middle" class="dx-label dx-fill-text" font-size="11">yawn, slow down</text>
+<text x="565" y="378" text-anchor="middle" class="dx-label-sm dx-fill-gold">↑  WHAT WE REALLY REFER TO  ↑</text>
+<line x1="100" y1="430" x2="620" y2="430" class="dx-stroke-dim" stroke-width="0.5" stroke-dasharray="2 3"/>
+<text x="360" y="455" text-anchor="middle" class="dx-title dx-fill-text" font-size="13" font-style="italic">"...we are referring to those overt acts and utterances themselves."</text>
+<text x="360" y="478" text-anchor="middle" class="dx-label-sm dx-fill-faint">— RYLE, THE CONCEPT OF MIND (1949)</text>
+</svg>`
+  },
+  {
+    id: 4,
+    eyebrow: 'Lesson 04 — Behaviorism\'s Problems',
+    title: 'Why behaviorism collapsed',
+    subtitle: 'Three knockout arguments — absent qualia, the inverted spectrum, and the tautology trap — plus the rise of neuroscience.',
+    bullets: [
+      '<strong>Absent qualia:</strong> a machine could behave just like us toward red things while having <em>no experience</em> at all.',
+      '<strong>Inverted spectrum:</strong> two people could behave identically while seeing systematically reversed colors.',
+      '<strong>Brain causation:</strong> by the 1950s, neurology showed brain states <em>cause</em> behavior — not behavior dispositions.',
+      '<strong>Tautology trap:</strong> if mental state = disposition to behave, then "the mental state explains behavior" reduces to "the disposition explains the behavior" — trivial.',
+      'Wittgenstein\'s <em>beetle-in-the-box</em> looks behaviorist, but is really about meaning, not denial of sensations.'
+    ],
+    hook: 'Three deathblows: an experience-free zombie, a colour-flipped twin, and a circular explanation.',
+    diagram: `<svg viewBox="0 0 720 540" xmlns="http://www.w3.org/2000/svg">
+<text x="360" y="28" text-anchor="middle" class="dx-eyebrow dx-fill-faint">THREE OBJECTIONS THAT KILLED BEHAVIORISM</text>
+<rect x="20" y="55" width="220" height="220" rx="3" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="130" y="78" text-anchor="middle" class="dx-eyebrow dx-fill-gold">1 · ABSENT QUALIA</text>
+<rect x="95" y="105" width="70" height="70" rx="4" class="dx-stroke" stroke-width="1.2" fill="#221f1a"/>
+<circle cx="115" cy="125" r="4" class="dx-fill-gold"/>
+<circle cx="145" cy="125" r="4" class="dx-fill-gold"/>
+<line x1="113" y1="150" x2="147" y2="150" class="dx-stroke" stroke-width="1"/>
+<rect x="105" y="178" width="50" height="6" class="dx-fill-faint"/>
+<circle cx="55" cy="140" r="14" fill="#c66651"/>
+<text x="55" y="170" text-anchor="middle" class="dx-label-sm dx-fill-dim">red apple</text>
+<line x1="73" y1="140" x2="93" y2="140" class="dx-stroke" stroke-width="0.8" stroke-dasharray="2 2"/>
+<polygon points="93,140 88,137 88,143" class="dx-fill-gold"/>
+<text x="200" y="135" text-anchor="middle" class="dx-label-sm dx-fill-dim">"red"</text>
+<text x="200" y="150" text-anchor="middle" class="dx-label-sm dx-fill-dim">picks up</text>
+<line x1="170" y1="140" x2="187" y2="140" class="dx-stroke" stroke-width="0.8"/>
+<polygon points="187,140 182,137 182,143" class="dx-fill-gold"/>
+<text x="130" y="220" text-anchor="middle" class="dx-label dx-fill-text" font-size="11">Same behaviour as us...</text>
+<text x="130" y="240" text-anchor="middle" class="dx-label dx-fill-gold" font-size="11" font-style="italic">no experience inside.</text>
+<text x="130" y="262" text-anchor="middle" class="dx-label-sm dx-fill-faint">Behaviour ≠ mind.</text>
+<rect x="250" y="55" width="220" height="220" rx="3" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="360" y="78" text-anchor="middle" class="dx-eyebrow dx-fill-gold">2 · INVERTED SPECTRUM</text>
+<circle cx="305" cy="120" r="14" class="dx-stroke" stroke-width="1" fill="#221f1a"/>
+<line x1="305" y1="134" x2="305" y2="160" class="dx-stroke" stroke-width="1"/>
+<text x="305" y="180" text-anchor="middle" class="dx-label-sm dx-fill-dim">YOU</text>
+<circle cx="415" cy="120" r="14" class="dx-stroke" stroke-width="1" fill="#221f1a"/>
+<line x1="415" y1="134" x2="415" y2="160" class="dx-stroke" stroke-width="1"/>
+<text x="415" y="180" text-anchor="middle" class="dx-label-sm dx-fill-dim">TWIN</text>
+<rect x="285" y="200" width="40" height="22" fill="#c66651"/>
+<text x="305" y="237" text-anchor="middle" class="dx-label-sm dx-fill-dim">sees red</text>
+<text x="305" y="252" text-anchor="middle" class="dx-label-sm dx-fill-text">says "red"</text>
+<rect x="395" y="200" width="40" height="22" fill="#5fa9b3"/>
+<text x="415" y="237" text-anchor="middle" class="dx-label-sm dx-fill-dim">sees cyan</text>
+<text x="415" y="252" text-anchor="middle" class="dx-label-sm dx-fill-text">says "red"</text>
+<text x="360" y="270" text-anchor="middle" class="dx-label-sm dx-fill-gold" font-style="italic">same behaviour, different qualia</text>
+<rect x="480" y="55" width="220" height="220" rx="3" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="590" y="78" text-anchor="middle" class="dx-eyebrow dx-fill-gold">3 · TAUTOLOGY TRAP</text>
+<circle cx="590" cy="170" r="60" class="dx-stroke-dim" stroke-width="1" fill="none" stroke-dasharray="3 3"/>
+<text x="590" y="120" text-anchor="middle" class="dx-label dx-fill-gold" font-size="11">behaviour</text>
+<text x="652" y="175" text-anchor="middle" class="dx-label dx-fill-text" font-size="10">explained by</text>
+<text x="590" y="225" text-anchor="middle" class="dx-label dx-fill-gold" font-size="11">disposition</text>
+<text x="528" y="175" text-anchor="middle" class="dx-label dx-fill-text" font-size="10">which IS</text>
+<polygon points="640,150 648,148 642,158" class="dx-fill-gold"/>
+<polygon points="640,190 648,192 642,182" class="dx-fill-gold"/>
+<text x="590" y="262" text-anchor="middle" class="dx-label-sm dx-fill-faint">circular = trivial</text>
+<rect x="20" y="305" width="680" height="200" rx="3" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="360" y="330" text-anchor="middle" class="dx-eyebrow dx-fill-gold">4 · THE NEUROLOGICAL BLOW · 1940s–50s</text>
+<path d="M 280 380 Q 280 360 305 358 Q 305 345 330 348 Q 350 340 370 350 Q 395 343 410 358 Q 440 358 440 385 Q 440 420 415 425 Q 400 440 370 437 Q 345 442 320 433 Q 290 432 285 415 Q 270 405 280 380 Z" class="dx-stroke" stroke-width="1.3" fill="#221f1a"/>
+<circle cx="320" cy="385" r="3" class="dx-fill-gold"/>
+<circle cx="370" cy="380" r="3" class="dx-fill-gold"/>
+<circle cx="400" cy="400" r="3" class="dx-fill-gold"/>
+<circle cx="350" cy="410" r="3" class="dx-fill-gold"/>
+<text x="80" y="395" class="dx-label dx-fill-text" font-size="12">Brain damage →</text>
+<text x="80" y="412" class="dx-label dx-fill-text" font-size="12">altered behaviour.</text>
+<text x="80" y="430" class="dx-label-sm dx-fill-dim">Visual cortex damage =</text>
+<text x="80" y="445" class="dx-label-sm dx-fill-dim">colour vision loss.</text>
+<text x="500" y="395" class="dx-label dx-fill-text" font-size="12">If brain explains behaviour,</text>
+<text x="500" y="412" class="dx-label dx-fill-text" font-size="12">why route through</text>
+<text x="500" y="429" class="dx-label dx-fill-gold" font-size="12" font-style="italic">"dispositions"?</text>
+<text x="360" y="490" text-anchor="middle" class="dx-label-sm dx-fill-faint">By the late 1950s, central-state materialism had won the field.</text>
+</svg>`
+  },
+  {
+    id: 5,
+    eyebrow: 'Lesson 05 — Identity Theory',
+    title: 'Mind is brain — central-state materialism',
+    subtitle: 'U. T. Place\'s 1956 paper proposed that mental events just ARE physiological events in the central nervous system.',
+    bullets: [
+      '<strong>Place 1956:</strong> the explanation of mental life is in the brain, not in behaviour.',
+      'Mental event = physiological event in the CNS. <em>Mind ≡ brain</em>.',
+      'Called <em>central-state materialism</em>, contrasting with behaviorism\'s <em>peripheral-state materialism</em>.',
+      'It is an <strong>empirical identity</strong>, not a definition: like discovering that <em>gene = DNA</em>.',
+      '"Mind" does not <em>mean</em> "brain" — but the two terms refer to the same thing.'
+    ],
+    hook: 'Same item, two names — like Hesperus and Phosphorus, or gene and DNA.',
+    diagram: `<svg viewBox="0 0 720 500" xmlns="http://www.w3.org/2000/svg">
+<text x="360" y="28" text-anchor="middle" class="dx-eyebrow dx-fill-faint">CENTRAL-STATE MATERIALISM · PLACE 1956 · CRICK 1994</text>
+<text x="180" y="80" text-anchor="middle" class="dx-eyebrow dx-fill-gold">THE MIND</text>
+<ellipse cx="180" cy="170" rx="100" ry="70" class="dx-stroke" stroke-width="1.3" fill="#1a1815"/>
+<text x="180" y="155" text-anchor="middle" class="dx-title dx-fill-text" font-size="14" font-style="italic">thoughts</text>
+<text x="180" y="178" text-anchor="middle" class="dx-title dx-fill-text" font-size="14" font-style="italic">feelings</text>
+<text x="180" y="200" text-anchor="middle" class="dx-title dx-fill-text" font-size="14" font-style="italic">pains, beliefs</text>
+<text x="360" y="160" text-anchor="middle" fill="#c9a96e" font-family="serif" font-size="64" font-weight="500">≡</text>
+<text x="360" y="200" text-anchor="middle" class="dx-eyebrow dx-fill-gold">IDENTICAL</text>
+<text x="360" y="218" text-anchor="middle" class="dx-label-sm dx-fill-dim">one and the same thing</text>
+<text x="540" y="80" text-anchor="middle" class="dx-eyebrow dx-fill-gold">THE BRAIN</text>
+<path d="M 460 170 Q 460 130 490 125 Q 495 105 530 110 Q 555 95 580 115 Q 615 115 620 150 Q 625 185 605 200 Q 595 220 570 218 Q 545 230 520 220 Q 490 222 480 205 Q 460 195 460 170 Z" class="dx-stroke" stroke-width="1.3" fill="#1a1815"/>
+<circle cx="510" cy="160" r="3" class="dx-fill-gold"/>
+<circle cx="560" cy="155" r="3" class="dx-fill-gold"/>
+<circle cx="540" cy="190" r="3" class="dx-fill-gold"/>
+<circle cx="585" cy="180" r="3" class="dx-fill-gold"/>
+<text x="540" y="260" text-anchor="middle" class="dx-label-sm dx-fill-dim">CNS · neurons firing</text>
+<line x1="60" y1="295" x2="660" y2="295" class="dx-stroke-dim" stroke-width="0.5" stroke-dasharray="3 3"/>
+<text x="360" y="325" text-anchor="middle" class="dx-eyebrow dx-fill-gold">THE EMPIRICAL ANALOGY</text>
+<rect x="100" y="345" width="160" height="50" rx="2" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="180" y="370" text-anchor="middle" class="dx-title dx-fill-text" font-size="14" font-style="italic">"gene"</text>
+<text x="180" y="385" text-anchor="middle" class="dx-label-sm dx-fill-dim">unit of heredity</text>
+<text x="320" y="380" text-anchor="middle" fill="#c9a96e" font-family="serif" font-size="38">≡</text>
+<rect x="360" y="345" width="160" height="50" rx="2" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="440" y="370" text-anchor="middle" class="dx-title dx-fill-text" font-size="14" font-style="italic">"DNA"</text>
+<text x="440" y="385" text-anchor="middle" class="dx-label-sm dx-fill-dim">deoxyribonucleic acid</text>
+<text x="360" y="425" text-anchor="middle" class="dx-label dx-fill-text" font-size="12">Same trick: words mean different things but refer to the same thing.</text>
+<text x="360" y="445" text-anchor="middle" class="dx-label dx-fill-text" font-size="12">Discovered by science, not by looking in a dictionary.</text>
+<text x="360" y="478" text-anchor="middle" class="dx-label-sm dx-fill-faint">"PERIPHERAL-STATE" MATERIALISM = BEHAVIORISM · "CENTRAL-STATE" = IDENTITY THEORY</text>
+</svg>`
+  },
+  {
+    id: 6,
+    eyebrow: 'Lesson 06 — Kripke\'s Argument',
+    title: 'The necessity of identity',
+    subtitle: 'Saul Kripke\'s 1970 lectures show that identities involving rigid designators are necessary — undermining the contingent mind-brain identity claim.',
+    bullets: [
+      'Identity theorists wanted: "mind = brain" is true but <em>contingent</em> (a scientific discovery, not a logical truth).',
+      '<strong>Kripke\'s proof:</strong> if a = b, and a is necessarily a, then by substitution a is necessarily b.',
+      'Therefore <em>identity is always necessary</em> — when both terms are <em>rigid designators</em> (names, not descriptions).',
+      'A rigid designator (e.g. "Elizabeth II") refers to the same thing in every possible world; "the Queen" does not.',
+      'Mind-brain identity used rigid terms ("pain," "C-fibre firing"), so it cannot be both <em>true and contingent</em>.'
+    ],
+    hook: 'If a = b, then necessarily a = b. There is no such thing as a contingent identity between rigid names.',
+    diagram: `<svg viewBox="0 0 720 540" xmlns="http://www.w3.org/2000/svg">
+<text x="360" y="28" text-anchor="middle" class="dx-eyebrow dx-fill-faint">KRIPKE 1970 · NAMING AND NECESSITY</text>
+<rect x="80" y="55" width="560" height="60" rx="2" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="100" y="80" class="dx-eyebrow dx-fill-gold">STEP 1 · ASSUME</text>
+<text x="360" y="100" text-anchor="middle" class="dx-title dx-fill-text" font-size="20" font-style="italic">a = b</text>
+<line x1="360" y1="120" x2="360" y2="135" class="dx-stroke" stroke-width="1"/>
+<polygon points="360,140 355,131 365,131" class="dx-fill-gold"/>
+<rect x="80" y="145" width="560" height="60" rx="2" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="100" y="170" class="dx-eyebrow dx-fill-gold">STEP 2 · TRIVIALLY TRUE</text>
+<text x="360" y="190" text-anchor="middle" class="dx-title dx-fill-text" font-size="20" font-style="italic">□ (a = a)</text>
+<text x="585" y="190" class="dx-label-sm dx-fill-dim">"necessarily"</text>
+<line x1="360" y1="210" x2="360" y2="225" class="dx-stroke" stroke-width="1"/>
+<polygon points="360,230 355,221 365,221" class="dx-fill-gold"/>
+<rect x="80" y="235" width="560" height="60" rx="2" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="100" y="260" class="dx-eyebrow dx-fill-gold">STEP 3 · SUBSTITUTE b FOR THE SECOND a</text>
+<text x="360" y="280" text-anchor="middle" class="dx-title dx-fill-gold" font-size="20" font-style="italic">∴  □ (a = b)</text>
+<rect x="80" y="320" width="560" height="80" rx="2" class="dx-stroke" stroke-width="1.5" fill="#221f1a"/>
+<text x="360" y="348" text-anchor="middle" class="dx-eyebrow dx-fill-gold">CONCLUSION</text>
+<text x="360" y="372" text-anchor="middle" class="dx-title dx-fill-text" font-size="14">Identity is always necessary —</text>
+<text x="360" y="390" text-anchor="middle" class="dx-title dx-fill-text" font-size="14" font-style="italic">there is no "contingent identity" between rigid names.</text>
+<rect x="80" y="425" width="270" height="100" rx="2" class="dx-stroke-dim" stroke-width="1" fill="#1a1815"/>
+<text x="215" y="448" text-anchor="middle" class="dx-eyebrow dx-fill-gold">RIGID DESIGNATORS</text>
+<text x="100" y="470" class="dx-label dx-fill-text" font-size="11">"Elizabeth II" — same person</text>
+<text x="100" y="486" class="dx-label dx-fill-text" font-size="11">in every possible world.</text>
+<text x="100" y="508" class="dx-label-sm dx-fill-gold">"pain" · "C-fibres firing" — RIGID</text>
+<rect x="370" y="425" width="270" height="100" rx="2" class="dx-stroke-dim" stroke-width="1" fill="#1a1815"/>
+<text x="505" y="448" text-anchor="middle" class="dx-eyebrow dx-fill-gold">DESCRIPTIONS</text>
+<text x="390" y="470" class="dx-label dx-fill-text" font-size="11">"the Queen" — different</text>
+<text x="390" y="486" class="dx-label dx-fill-text" font-size="11">people across time.</text>
+<text x="390" y="508" class="dx-label-sm dx-fill-dim">NOT RIGID · proof doesn't apply</text>
+</svg>`
+  },
+  {
+    id: 7,
+    eyebrow: 'Lesson 07 — Type vs Token',
+    title: 'One concerto, many performances',
+    subtitle: 'A distinction borrowed from philosophy of art that gives the identity theorist a fallback — and opens the door to multiple realizability.',
+    bullets: [
+      '<strong>Type</strong> = the abstract pattern. <strong>Token</strong> = a particular instance of that pattern.',
+      'Elgar wrote <em>one</em> Cello Concerto (type) but it has been performed hundreds of times (tokens).',
+      '<strong>Type identity:</strong> the <em>kind</em> "pain" = the <em>kind</em> "C-fibre firing." Strong, sweeping, less plausible.',
+      '<strong>Token identity:</strong> <em>this</em> pain = <em>this</em> brain event. Weaker, more flexible, more convincing.',
+      'Trouble: if every pain is a different brain state, what makes them all <em>pains</em>?'
+    ],
+    hook: 'One score, many performances — but no two performances are the same physical sound.',
+    diagram: `<svg viewBox="0 0 720 500" xmlns="http://www.w3.org/2000/svg">
+<text x="360" y="28" text-anchor="middle" class="dx-eyebrow dx-fill-faint">THE TYPE/TOKEN DISTINCTION · ELGAR'S CELLO CONCERTO IN E MINOR</text>
+<rect x="240" y="55" width="240" height="100" rx="2" class="dx-stroke" stroke-width="1.5" fill="#221f1a"/>
+<text x="360" y="80" text-anchor="middle" class="dx-eyebrow dx-fill-gold">THE TYPE</text>
+<text x="360" y="108" text-anchor="middle" class="dx-title dx-fill-text" font-size="16" font-style="italic">Cello Concerto in E minor</text>
+<text x="360" y="130" text-anchor="middle" class="dx-label-sm dx-fill-dim">a single abstract work · the score</text>
+<g transform="translate(295, 138)">
+<line x1="0" y1="0" x2="130" y2="0" class="dx-stroke-dim" stroke-width="0.4"/>
+<line x1="0" y1="3" x2="130" y2="3" class="dx-stroke-dim" stroke-width="0.4"/>
+<line x1="0" y1="6" x2="130" y2="6" class="dx-stroke-dim" stroke-width="0.4"/>
+<circle cx="20" cy="3" r="1.8" class="dx-fill-gold"/>
+<circle cx="50" cy="0" r="1.8" class="dx-fill-gold"/>
+<circle cx="80" cy="6" r="1.8" class="dx-fill-gold"/>
+<circle cx="110" cy="3" r="1.8" class="dx-fill-gold"/>
+</g>
+<line x1="290" y1="155" x2="120" y2="220" class="dx-stroke-dim" stroke-width="0.8"/>
+<line x1="340" y1="155" x2="280" y2="220" class="dx-stroke-dim" stroke-width="0.8"/>
+<line x1="380" y1="155" x2="440" y2="220" class="dx-stroke-dim" stroke-width="0.8"/>
+<line x1="430" y1="155" x2="600" y2="220" class="dx-stroke-dim" stroke-width="0.8"/>
+<text x="360" y="200" text-anchor="middle" class="dx-eyebrow dx-fill-gold">THE TOKENS · INDIVIDUAL PERFORMANCES</text>
+<rect x="40" y="220" width="160" height="65" rx="2" class="dx-stroke" stroke-width="0.8" fill="#1a1815"/>
+<text x="120" y="240" text-anchor="middle" class="dx-label dx-fill-text" font-size="11">London · 1919</text>
+<text x="120" y="258" text-anchor="middle" class="dx-label-sm dx-fill-dim" font-style="italic">disastrous premiere</text>
+<text x="120" y="275" text-anchor="middle" class="dx-label-sm dx-fill-faint">token 1</text>
+<rect x="200" y="220" width="160" height="65" rx="2" class="dx-stroke" stroke-width="0.8" fill="#1a1815"/>
+<text x="280" y="240" text-anchor="middle" class="dx-label dx-fill-text" font-size="11">du Pré · 1965</text>
+<text x="280" y="258" text-anchor="middle" class="dx-label-sm dx-fill-dim" font-style="italic">elegiac, definitive</text>
+<text x="280" y="275" text-anchor="middle" class="dx-label-sm dx-fill-faint">token 2</text>
+<rect x="360" y="220" width="160" height="65" rx="2" class="dx-stroke" stroke-width="0.8" fill="#1a1815"/>
+<text x="440" y="240" text-anchor="middle" class="dx-label dx-fill-text" font-size="11">Vienna · 1987</text>
+<text x="440" y="258" text-anchor="middle" class="dx-label-sm dx-fill-dim" font-style="italic">studio recording</text>
+<text x="440" y="275" text-anchor="middle" class="dx-label-sm dx-fill-faint">token 3</text>
+<rect x="520" y="220" width="160" height="65" rx="2" class="dx-stroke" stroke-width="0.8" fill="#1a1815"/>
+<text x="600" y="240" text-anchor="middle" class="dx-label dx-fill-text" font-size="11">Tokyo · 2024</text>
+<text x="600" y="258" text-anchor="middle" class="dx-label-sm dx-fill-dim" font-style="italic">student concert</text>
+<text x="600" y="275" text-anchor="middle" class="dx-label-sm dx-fill-faint">token n</text>
+<line x1="60" y1="320" x2="660" y2="320" class="dx-stroke-dim" stroke-width="0.4" stroke-dasharray="3 3"/>
+<text x="360" y="345" text-anchor="middle" class="dx-eyebrow dx-fill-gold">APPLIED TO MIND</text>
+<rect x="60" y="365" width="290" height="100" rx="2" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="205" y="388" text-anchor="middle" class="dx-title dx-fill-gold" font-size="14">TYPE IDENTITY</text>
+<text x="205" y="412" text-anchor="middle" class="dx-label dx-fill-text" font-size="11.5">PAIN-TYPE = C-FIBRE-FIRING-TYPE</text>
+<text x="205" y="435" text-anchor="middle" class="dx-label-sm dx-fill-dim">Strong claim — every pain</text>
+<text x="205" y="450" text-anchor="middle" class="dx-label-sm dx-fill-dim">requires the SAME brain state.</text>
+<rect x="370" y="365" width="290" height="100" rx="2" class="dx-stroke" stroke-width="1.5" fill="#221f1a"/>
+<text x="515" y="388" text-anchor="middle" class="dx-title dx-fill-gold" font-size="14">TOKEN IDENTITY</text>
+<text x="515" y="412" text-anchor="middle" class="dx-label dx-fill-text" font-size="11.5">this pain = this brain event</text>
+<text x="515" y="435" text-anchor="middle" class="dx-label-sm dx-fill-dim">Weaker — different individuals</text>
+<text x="515" y="450" text-anchor="middle" class="dx-label-sm dx-fill-dim">can pain in different brain states.</text>
+<text x="360" y="488" text-anchor="middle" class="dx-label-sm dx-fill-faint" font-style="italic">But: what now makes all the tokens tokens of the SAME type?</text>
+</svg>`
+  }
+];
+
+
+const LESSONS_PART2 = [
+  {
+    id: 8,
+    eyebrow: 'Lesson 08 — Functionalism',
+    title: 'Mind as software',
+    subtitle: 'Hilary Putnam (1967): pain is not a brain state but a computational state — defined by its inputs, outputs, and role, not its physical substrate.',
+    bullets: [
+      '<strong>Putnam 1967, "Psychological Predicates":</strong> the mind is the <em>functional state</em> of a Turing machine.',
+      'A mental state is defined by its <em>causal role</em> — what causes it, what it causes — not by its hardware.',
+      'The hardware/software distinction: same computation, different physical realisation.',
+      'Two computers (electronic, optical) can both compute 7 × 9 = 63 with no physical state in common.',
+      'Functionalism quickly displaced identity theory and became the dominant view in cognitive science.'
+    ],
+    hook: 'Mind is to brain what software is to silicon — the same program can run on very different machines.',
+    diagram: `<svg viewBox="0 0 720 520" xmlns="http://www.w3.org/2000/svg">
+<text x="360" y="28" text-anchor="middle" class="dx-eyebrow dx-fill-faint">FUNCTIONALISM · PUTNAM 1967 · "PSYCHOLOGICAL PREDICATES"</text>
+<rect x="100" y="60" width="520" height="100" rx="3" class="dx-stroke" stroke-width="1.5" fill="#221f1a"/>
+<text x="360" y="85" text-anchor="middle" class="dx-eyebrow dx-fill-gold">SOFTWARE · COMPUTATIONAL / FUNCTIONAL STATES</text>
+<text x="200" y="118" text-anchor="middle" class="dx-title dx-fill-text" font-size="14" font-style="italic">PAIN</text>
+<text x="200" y="138" text-anchor="middle" class="dx-label-sm dx-fill-dim">role: caused by tissue damage,</text>
+<text x="200" y="151" text-anchor="middle" class="dx-label-sm dx-fill-dim">causes withdrawal, complaint</text>
+<text x="360" y="118" text-anchor="middle" class="dx-title dx-fill-text" font-size="14" font-style="italic">BELIEF</text>
+<text x="360" y="138" text-anchor="middle" class="dx-label-sm dx-fill-dim">role: input from perception,</text>
+<text x="360" y="151" text-anchor="middle" class="dx-label-sm dx-fill-dim">causes inference, action</text>
+<text x="520" y="118" text-anchor="middle" class="dx-title dx-fill-text" font-size="14" font-style="italic">DESIRE</text>
+<text x="520" y="138" text-anchor="middle" class="dx-label-sm dx-fill-dim">role: combines with belief,</text>
+<text x="520" y="151" text-anchor="middle" class="dx-label-sm dx-fill-dim">causes goal-directed behaviour</text>
+<line x1="360" y1="160" x2="360" y2="195" class="dx-stroke-dim" stroke-width="0.8" stroke-dasharray="3 3"/>
+<text x="380" y="180" class="dx-label-sm dx-fill-faint">REALIZED IN</text>
+<rect x="100" y="200" width="520" height="280" rx="3" class="dx-stroke-dim" stroke-width="1" fill="#1a1815"/>
+<text x="360" y="225" text-anchor="middle" class="dx-eyebrow dx-fill-gold">HARDWARE · VARIES INDEPENDENTLY</text>
+<text x="360" y="255" text-anchor="middle" class="dx-title dx-fill-text" font-size="14" font-style="italic">Same function: 7 × 9 → 63</text>
+<rect x="130" y="280" width="170" height="170" rx="3" class="dx-stroke" stroke-width="1" fill="#221f1a"/>
+<text x="215" y="302" text-anchor="middle" class="dx-eyebrow dx-fill-gold">ELECTRONIC</text>
+<g transform="translate(155, 315)">
+<rect x="0" y="0" width="120" height="60" class="dx-stroke" stroke-width="0.8" fill="#1a1815"/>
+<line x1="20" y1="15" x2="100" y2="15" class="dx-stroke-dim" stroke-width="0.5"/>
+<line x1="20" y1="30" x2="100" y2="30" class="dx-stroke-dim" stroke-width="0.5"/>
+<line x1="20" y1="45" x2="100" y2="45" class="dx-stroke-dim" stroke-width="0.5"/>
+<circle cx="35" cy="15" r="2" class="dx-fill-gold"/>
+<circle cx="65" cy="30" r="2" class="dx-fill-gold"/>
+<circle cx="85" cy="45" r="2" class="dx-fill-gold"/>
+</g>
+<text x="215" y="402" text-anchor="middle" class="dx-label-sm dx-fill-dim">electrons through</text>
+<text x="215" y="416" text-anchor="middle" class="dx-label-sm dx-fill-dim">silicon gates</text>
+<text x="215" y="438" text-anchor="middle" class="dx-label dx-fill-text" font-style="italic">→ 63</text>
+<rect x="320" y="280" width="170" height="170" rx="3" class="dx-stroke" stroke-width="1" fill="#221f1a"/>
+<text x="405" y="302" text-anchor="middle" class="dx-eyebrow dx-fill-gold">OPTICAL</text>
+<g transform="translate(345, 315)">
+<rect x="0" y="0" width="120" height="60" class="dx-stroke" stroke-width="0.8" fill="#1a1815"/>
+<line x1="10" y1="20" x2="110" y2="20" stroke="#e8c285" stroke-width="0.6"/>
+<line x1="10" y1="40" x2="110" y2="40" stroke="#e8c285" stroke-width="0.6"/>
+<circle cx="30" cy="20" r="2" class="dx-fill-gold"/>
+<circle cx="60" cy="40" r="2" class="dx-fill-gold"/>
+<circle cx="90" cy="20" r="2" class="dx-fill-gold"/>
+</g>
+<text x="405" y="402" text-anchor="middle" class="dx-label-sm dx-fill-dim">photons through</text>
+<text x="405" y="416" text-anchor="middle" class="dx-label-sm dx-fill-dim">crystal lattice</text>
+<text x="405" y="438" text-anchor="middle" class="dx-label dx-fill-text" font-style="italic">→ 63</text>
+<rect x="510" y="280" width="100" height="170" rx="3" class="dx-stroke" stroke-width="1" fill="#221f1a"/>
+<text x="560" y="302" text-anchor="middle" class="dx-eyebrow dx-fill-gold">BRAIN</text>
+<path d="M 525 320 Q 525 312 535 311 Q 540 305 552 308 Q 565 304 575 313 Q 590 313 590 327 Q 590 345 580 348 Q 575 358 560 357 Q 545 360 535 354 Q 525 350 525 340 Z" class="dx-stroke" stroke-width="0.8" fill="#1a1815"/>
+<circle cx="545" cy="330" r="1.5" class="dx-fill-gold"/>
+<circle cx="565" cy="335" r="1.5" class="dx-fill-gold"/>
+<text x="560" y="402" text-anchor="middle" class="dx-label-sm dx-fill-dim">neurons firing</text>
+<text x="560" y="416" text-anchor="middle" class="dx-label-sm dx-fill-dim">across synapses</text>
+<text x="560" y="438" text-anchor="middle" class="dx-label dx-fill-text" font-style="italic">→ 63</text>
+<text x="360" y="500" text-anchor="middle" class="dx-label-sm dx-fill-faint">Different physical states · same functional / Turing-machine state.</text>
+</svg>`
+  },
+  {
+    id: 9,
+    eyebrow: 'Lesson 09 — Multiple Realizability',
+    title: 'Pain across very different brains',
+    subtitle: 'Putnam\'s most powerful argument: one mental state can be realized in radically different physical systems.',
+    bullets: [
+      '<strong>The thesis:</strong> one mental state can be realized in <em>multiple, very different</em> physical ways.',
+      'Goats, birds, reptiles, and mollusks all feel pain — yet have wildly different nervous systems.',
+      'It is implausible that they share the <em>same</em> physiological brain state when they do.',
+      'So pain cannot be <em>identical</em> to any specific brain state — identity theory fails.',
+      'Pain must be defined by what it <em>does</em> (its functional role), not what it is made of.'
+    ],
+    hook: 'If an octopus and a human both feel pain, "pain" cannot be a particular kind of brain tissue.',
+    diagram: `<svg viewBox="0 0 720 500" xmlns="http://www.w3.org/2000/svg">
+<text x="360" y="28" text-anchor="middle" class="dx-eyebrow dx-fill-faint">MULTIPLE REALIZABILITY · ONE MENTAL STATE, MANY PHYSICAL SUBSTRATES</text>
+<circle cx="360" cy="245" r="55" class="dx-stroke" stroke-width="1.8" fill="#221f1a"/>
+<text x="360" y="240" text-anchor="middle" class="dx-title dx-fill-gold" font-size="16" font-style="italic">PAIN</text>
+<text x="360" y="258" text-anchor="middle" class="dx-label-sm dx-fill-dim">one functional state</text>
+<text x="360" y="272" text-anchor="middle" class="dx-label-sm dx-fill-dim">role: avoid → withdraw</text>
+<line x1="320" y1="210" x2="180" y2="125" class="dx-stroke" stroke-width="0.8"/>
+<line x1="400" y1="210" x2="540" y2="125" class="dx-stroke" stroke-width="0.8"/>
+<line x1="320" y1="280" x2="180" y2="365" class="dx-stroke" stroke-width="0.8"/>
+<line x1="400" y1="280" x2="540" y2="365" class="dx-stroke" stroke-width="0.8"/>
+<g transform="translate(105, 80)">
+<rect x="0" y="0" width="150" height="80" rx="3" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="75" y="20" text-anchor="middle" class="dx-eyebrow dx-fill-gold">HUMAN</text>
+<path d="M 50 55 Q 50 42 65 41 Q 70 32 82 35 Q 92 28 102 38 Q 115 38 117 50 Q 120 62 110 65 Q 102 72 90 71 Q 78 73 70 67 Q 55 67 50 55 Z" class="dx-stroke" stroke-width="0.8" fill="#221f1a"/>
+<circle cx="68" cy="50" r="1.4" class="dx-fill-gold"/>
+<circle cx="92" cy="56" r="1.4" class="dx-fill-gold"/>
+</g>
+<g transform="translate(465, 80)">
+<rect x="0" y="0" width="150" height="80" rx="3" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="75" y="20" text-anchor="middle" class="dx-eyebrow dx-fill-gold">BIRD</text>
+<ellipse cx="75" cy="55" rx="35" ry="20" class="dx-stroke" stroke-width="0.8" fill="#221f1a"/>
+<line x1="105" y1="55" x2="115" y2="50" class="dx-stroke" stroke-width="0.8"/>
+<circle cx="65" cy="50" r="1.4" class="dx-fill-gold"/>
+<circle cx="85" cy="58" r="1.4" class="dx-fill-gold"/>
+</g>
+<g transform="translate(105, 330)">
+<rect x="0" y="0" width="150" height="80" rx="3" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="75" y="20" text-anchor="middle" class="dx-eyebrow dx-fill-gold">OCTOPUS</text>
+<ellipse cx="75" cy="42" rx="22" ry="14" class="dx-stroke" stroke-width="0.8" fill="#221f1a"/>
+<path d="M 60 52 Q 55 65 50 72" class="dx-stroke" stroke-width="0.8" fill="none"/>
+<path d="M 70 54 Q 65 65 62 72" class="dx-stroke" stroke-width="0.8" fill="none"/>
+<path d="M 80 54 Q 85 65 88 72" class="dx-stroke" stroke-width="0.8" fill="none"/>
+<path d="M 90 52 Q 95 65 100 72" class="dx-stroke" stroke-width="0.8" fill="none"/>
+<circle cx="68" cy="42" r="1.2" class="dx-fill-gold"/>
+<circle cx="82" cy="42" r="1.2" class="dx-fill-gold"/>
+</g>
+<g transform="translate(465, 330)">
+<rect x="0" y="0" width="150" height="80" rx="3" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="75" y="20" text-anchor="middle" class="dx-eyebrow dx-fill-gold">SILICON · A.I.</text>
+<rect x="50" y="35" width="50" height="35" class="dx-stroke" stroke-width="0.8" fill="#221f1a"/>
+<line x1="55" y1="45" x2="95" y2="45" class="dx-stroke-dim" stroke-width="0.4"/>
+<line x1="55" y1="55" x2="95" y2="55" class="dx-stroke-dim" stroke-width="0.4"/>
+<line x1="55" y1="65" x2="95" y2="65" class="dx-stroke-dim" stroke-width="0.4"/>
+<circle cx="65" cy="45" r="1.4" class="dx-fill-gold"/>
+<circle cx="80" cy="55" r="1.4" class="dx-fill-gold"/>
+<circle cx="90" cy="65" r="1.4" class="dx-fill-gold"/>
+</g>
+<line x1="60" y1="445" x2="660" y2="445" class="dx-stroke-dim" stroke-width="0.4" stroke-dasharray="3 3"/>
+<text x="360" y="468" text-anchor="middle" class="dx-label dx-fill-text" font-size="12" font-style="italic">No physical state is shared across all of these — yet all instantiate "pain."</text>
+<text x="360" y="488" text-anchor="middle" class="dx-label-sm dx-fill-faint">∴  PAIN IS NOT IDENTICAL TO ANY SPECIFIC BRAIN STATE</text>
+</svg>`
+  },
+  {
+    id: 10,
+    eyebrow: 'Lesson 10 — Functionalism\'s Limits',
+    title: 'The qualia problem returns',
+    subtitle: 'Functionalism solves multiple realizability beautifully — but inherits behaviorism\'s old enemy: subjective experience.',
+    bullets: [
+      'Two robots in <em>identical</em> functional / Turing-machine states could have spectra inverted relative to one another.',
+      'Same role, same input/output mapping — but qualitatively different experience inside.',
+      'A Turing machine "computes about red" without having any <em>idea</em> what red is like.',
+      '<strong>Putnam recanted in 1991:</strong> any computational description applies to any physical thing — making functionalism trivial.',
+      'Some now read functionalism as a kind of <em>property dualism</em>: physical body, nonphysical functional properties.'
+    ],
+    hook: 'Computing about red ≠ experiencing red. The function is silent on what it feels like.',
+    diagram: `<svg viewBox="0 0 720 520" xmlns="http://www.w3.org/2000/svg">
+<text x="360" y="28" text-anchor="middle" class="dx-eyebrow dx-fill-faint">QUALIA STILL ESCAPE THE FUNCTIONAL DESCRIPTION</text>
+<text x="180" y="65" text-anchor="middle" class="dx-eyebrow dx-fill-gold">ROBOT A</text>
+<text x="540" y="65" text-anchor="middle" class="dx-eyebrow dx-fill-gold">ROBOT B</text>
+<rect x="125" y="80" width="110" height="130" rx="6" class="dx-stroke" stroke-width="1.2" fill="#221f1a"/>
+<circle cx="155" cy="115" r="6" class="dx-fill-gold"/>
+<circle cx="205" cy="115" r="6" class="dx-fill-gold"/>
+<line x1="150" y1="155" x2="210" y2="155" class="dx-stroke" stroke-width="1"/>
+<rect x="150" y="180" width="60" height="10" class="dx-fill-faint"/>
+<rect x="485" y="80" width="110" height="130" rx="6" class="dx-stroke" stroke-width="1.2" fill="#221f1a"/>
+<circle cx="515" cy="115" r="6" class="dx-fill-gold"/>
+<circle cx="565" cy="115" r="6" class="dx-fill-gold"/>
+<line x1="510" y1="155" x2="570" y2="155" class="dx-stroke" stroke-width="1"/>
+<rect x="510" y="180" width="60" height="10" class="dx-fill-faint"/>
+<rect x="60" y="135" width="40" height="22" fill="#c66651"/>
+<text x="80" y="170" text-anchor="middle" class="dx-label-sm dx-fill-dim">red light</text>
+<line x1="100" y1="146" x2="123" y2="146" class="dx-stroke-dim" stroke-width="0.8" stroke-dasharray="2 2"/>
+<rect x="615" y="135" width="40" height="22" fill="#c66651"/>
+<text x="635" y="170" text-anchor="middle" class="dx-label-sm dx-fill-dim">red light</text>
+<line x1="615" y1="146" x2="597" y2="146" class="dx-stroke-dim" stroke-width="0.8" stroke-dasharray="2 2"/>
+<rect x="265" y="100" width="190" height="110" rx="3" class="dx-stroke" stroke-width="1.5" fill="#221f1a"/>
+<text x="360" y="125" text-anchor="middle" class="dx-eyebrow dx-fill-gold">FUNCTIONAL STATE</text>
+<text x="360" y="148" text-anchor="middle" class="dx-title dx-fill-text" font-size="13" font-style="italic">"red detected"</text>
+<text x="360" y="170" text-anchor="middle" class="dx-label-sm dx-fill-dim">input → label "red"</text>
+<text x="360" y="186" text-anchor="middle" class="dx-label-sm dx-fill-dim">→ pick / approach</text>
+<text x="360" y="202" text-anchor="middle" class="dx-label-sm dx-fill-gold">(IDENTICAL FOR BOTH)</text>
+<line x1="235" y1="155" x2="265" y2="155" class="dx-stroke" stroke-width="0.8"/>
+<line x1="455" y1="155" x2="485" y2="155" class="dx-stroke" stroke-width="0.8"/>
+<line x1="60" y1="245" x2="660" y2="245" class="dx-stroke-dim" stroke-width="0.4" stroke-dasharray="3 3"/>
+<text x="360" y="270" text-anchor="middle" class="dx-eyebrow dx-fill-gold">BUT THEIR INNER QUALIA DIFFER</text>
+<rect x="100" y="290" width="160" height="100" rx="3" class="dx-stroke-dim" stroke-width="1" stroke-dasharray="3 3" fill="#1a1815"/>
+<text x="180" y="312" text-anchor="middle" class="dx-label-sm dx-fill-dim">robot A experiences:</text>
+<rect x="155" y="325" width="50" height="40" fill="#c66651"/>
+<text x="180" y="380" text-anchor="middle" class="dx-label dx-fill-text" font-size="11" font-style="italic">a red qualia</text>
+<rect x="460" y="290" width="160" height="100" rx="3" class="dx-stroke-dim" stroke-width="1" stroke-dasharray="3 3" fill="#1a1815"/>
+<text x="540" y="312" text-anchor="middle" class="dx-label-sm dx-fill-dim">robot B experiences:</text>
+<rect x="515" y="325" width="50" height="40" fill="#5fa9b3"/>
+<text x="540" y="380" text-anchor="middle" class="dx-label dx-fill-text" font-size="11" font-style="italic">a cyan qualia</text>
+<rect x="60" y="420" width="600" height="80" rx="3" class="dx-stroke" stroke-width="0.8" fill="#221f1a"/>
+<text x="360" y="442" text-anchor="middle" class="dx-eyebrow dx-fill-gold">PUTNAM RECANTS · 1991</text>
+<text x="360" y="465" text-anchor="middle" class="dx-title dx-fill-text" font-size="13" font-style="italic">"Any computational description of nonphysical properties</text>
+<text x="360" y="485" text-anchor="middle" class="dx-title dx-fill-text" font-size="13" font-style="italic">can be applied to any physical thing — functionalism is trivial."</text>
+</svg>`
+  },
+  {
+    id: 11,
+    eyebrow: 'Lesson 11 — Anomalous Monism',
+    title: 'Two descriptions, one event',
+    subtitle: 'Davidson (1970): events themselves are physical, but mental descriptions of them are irreducible to physical ones.',
+    bullets: [
+      '<strong>Davidson, "Mental Events" (1970):</strong> mental and physical are two <em>vocabularies</em> for the same events.',
+      'Mental descriptions are <em>anomalous</em> — they have no strict laws and don\'t reduce to physical descriptions.',
+      'Compare <em>brightness</em> (psychological) and <em>luminance</em> (physical, measurable in cd/m²).',
+      'Yellow is "bright" in a way nothing in physics captures — brightness lives in psychology.',
+      'Monism (one set of events) + anomaly (no reduction) = a sophisticated middle path.'
+    ],
+    hook: 'Same event, two descriptions. Like a coin seen from two angles — one face is gold, the other is just metal.',
+    diagram: `<svg viewBox="0 0 720 500" xmlns="http://www.w3.org/2000/svg">
+<text x="360" y="28" text-anchor="middle" class="dx-eyebrow dx-fill-faint">DAVIDSON 1970 · "MENTAL EVENTS"</text>
+<ellipse cx="360" cy="120" rx="140" ry="40" class="dx-stroke" stroke-width="1.5" fill="#221f1a"/>
+<text x="360" y="115" text-anchor="middle" class="dx-eyebrow dx-fill-gold">A SINGLE EVENT IN THE WORLD</text>
+<text x="360" y="140" text-anchor="middle" class="dx-label-sm dx-fill-dim">e.g. seeing the yellow card</text>
+<line x1="280" y1="160" x2="180" y2="220" class="dx-stroke-dim" stroke-width="0.8"/>
+<line x1="440" y1="160" x2="540" y2="220" class="dx-stroke-dim" stroke-width="0.8"/>
+<text x="220" y="200" class="dx-label-sm dx-fill-gold">PHYSICAL DESCRIPTION</text>
+<text x="465" y="200" class="dx-label-sm dx-fill-gold">MENTAL DESCRIPTION</text>
+<rect x="60" y="225" width="240" height="180" rx="3" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="180" y="248" text-anchor="middle" class="dx-title dx-fill-text" font-size="14" font-style="italic">LUMINANCE</text>
+<text x="180" y="266" text-anchor="middle" class="dx-label-sm dx-fill-dim">cd/m² · radiation per unit area</text>
+<defs>
+<linearGradient id="lumGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+<stop offset="0%" stop-color="#0f0e0c"/>
+<stop offset="100%" stop-color="#fff8e1"/>
+</linearGradient>
+</defs>
+<rect x="80" y="290" width="200" height="22" fill="url(#lumGrad)" stroke="#8a7548" stroke-width="0.5"/>
+<text x="80" y="328" class="dx-label-sm dx-fill-faint">0 cd/m²</text>
+<text x="280" y="328" text-anchor="end" class="dx-label-sm dx-fill-faint">10⁵ cd/m²</text>
+<text x="180" y="362" text-anchor="middle" class="dx-label dx-fill-text" font-size="11">measured by photometer</text>
+<text x="180" y="380" text-anchor="middle" class="dx-label-sm dx-fill-dim">objective · physical · reducible</text>
+<rect x="420" y="225" width="240" height="180" rx="3" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="540" y="248" text-anchor="middle" class="dx-title dx-fill-text" font-size="14" font-style="italic">BRIGHTNESS</text>
+<text x="540" y="266" text-anchor="middle" class="dx-label-sm dx-fill-dim">how bright a colour appears</text>
+<rect x="455" y="285" width="50" height="32" fill="#f5d24a"/>
+<text x="480" y="332" text-anchor="middle" class="dx-label-sm dx-fill-text">yellow</text>
+<text x="480" y="346" text-anchor="middle" class="dx-label-sm dx-fill-gold">"bright!"</text>
+<rect x="555" y="285" width="50" height="32" fill="#3a4a1f"/>
+<text x="580" y="332" text-anchor="middle" class="dx-label-sm dx-fill-text">olive</text>
+<text x="580" y="346" text-anchor="middle" class="dx-label-sm dx-fill-dim">"dark"</text>
+<text x="540" y="378" text-anchor="middle" class="dx-label-sm dx-fill-faint" font-style="italic">determined ONLY by direct observation</text>
+<rect x="60" y="425" width="600" height="55" rx="3" class="dx-stroke" stroke-width="1.2" fill="#221f1a"/>
+<text x="360" y="450" text-anchor="middle" class="dx-title dx-fill-text" font-size="13" font-style="italic">Same surface — physically described as luminance, psychologically as brightness.</text>
+<text x="360" y="470" text-anchor="middle" class="dx-label-sm dx-fill-gold">ONE EVENT · TWO IRREDUCIBLE VOCABULARIES</text>
+</svg>`
+  },
+  {
+    id: 12,
+    eyebrow: 'Lesson 12 — Eliminativism',
+    title: 'There is no mind to explain',
+    subtitle: 'Paul & Patricia Churchland and Stephen Stich: folk psychology is a radically false theory that completed neuroscience will displace, not reduce.',
+    bullets: [
+      '<strong>Folk psychology</strong> = ordinary talk of beliefs, desires, hopes, fears.',
+      'Eliminativists hold this is a <em>theory</em> ("theory theory") — and a radically false one.',
+      'Like <em>witches</em>: not reduced to chemistry, simply eliminated as a product of superstition.',
+      'Hopes, fears, beliefs, desires will likewise be <em>displaced, not reduced</em>, by completed neuroscience.',
+      'Famous Churchland line: folk psychology "constitutes a radically false theory, a theory so fundamentally defective..."'
+    ],
+    hook: 'Witches were not reduced to "low-level demonic magic." They were eliminated. Same coming for "beliefs."',
+    diagram: `<svg viewBox="0 0 720 500" xmlns="http://www.w3.org/2000/svg">
+<text x="360" y="28" text-anchor="middle" class="dx-eyebrow dx-fill-faint">THE WITCHES ANALOGY · CHURCHLAND, STICH</text>
+<rect x="40" y="60" width="300" height="380" rx="3" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="190" y="85" text-anchor="middle" class="dx-eyebrow dx-fill-gold">PRECEDENT · WITCHES</text>
+<rect x="65" y="105" width="250" height="80" rx="2" class="dx-stroke-dim" stroke-width="0.8" fill="#221f1a"/>
+<text x="190" y="126" text-anchor="middle" class="dx-title dx-fill-text" font-size="13" font-style="italic">witch theory</text>
+<text x="190" y="148" text-anchor="middle" class="dx-label-sm dx-fill-dim">cauldrons · spells · familiars</text>
+<text x="190" y="164" text-anchor="middle" class="dx-label-sm dx-fill-dim">explained illness, weather,</text>
+<text x="190" y="178" text-anchor="middle" class="dx-label-sm dx-fill-dim">cattle deaths, bad luck</text>
+<line x1="190" y1="195" x2="190" y2="225" class="dx-stroke" stroke-width="1"/>
+<polygon points="190,230 185,221 195,221" class="dx-fill-gold"/>
+<text x="290" y="215" class="dx-label-sm dx-fill-gold">SCIENCE</text>
+<rect x="65" y="240" width="250" height="80" rx="2" class="dx-stroke" stroke-width="1.2" fill="#221f1a"/>
+<text x="190" y="262" text-anchor="middle" class="dx-eyebrow dx-fill-gold">VERDICT</text>
+<text x="190" y="285" text-anchor="middle" class="dx-title dx-fill-text" font-size="13" font-style="italic">"There are no witches."</text>
+<text x="190" y="305" text-anchor="middle" class="dx-label-sm dx-fill-dim">Eliminated, not reduced.</text>
+<text x="190" y="350" text-anchor="middle" class="dx-label-sm dx-fill-faint">No scientist tries to map "witchcraft"</text>
+<text x="190" y="367" text-anchor="middle" class="dx-label-sm dx-fill-faint">onto chemistry. The category</text>
+<text x="190" y="384" text-anchor="middle" class="dx-label-sm dx-fill-faint">simply disappeared from serious</text>
+<text x="190" y="401" text-anchor="middle" class="dx-label-sm dx-fill-faint">explanation altogether.</text>
+<text x="190" y="425" text-anchor="middle" class="dx-label dx-fill-gold" font-size="11" font-style="italic">a product of superstition</text>
+<text x="370" y="248" text-anchor="middle" fill="#c9a96e" font-family="serif" font-size="32">≈</text>
+<text x="370" y="270" text-anchor="middle" class="dx-eyebrow dx-fill-faint">ANALOGY</text>
+<rect x="400" y="60" width="300" height="380" rx="3" class="dx-stroke" stroke-width="1.2" fill="#221f1a"/>
+<text x="550" y="85" text-anchor="middle" class="dx-eyebrow dx-fill-gold">PRESENT · FOLK PSYCHOLOGY</text>
+<rect x="425" y="105" width="250" height="80" rx="2" class="dx-stroke-dim" stroke-width="0.8" fill="#1a1815"/>
+<text x="550" y="126" text-anchor="middle" class="dx-title dx-fill-text" font-size="13" font-style="italic">"folk" theory of mind</text>
+<text x="550" y="148" text-anchor="middle" class="dx-label-sm dx-fill-dim">beliefs · desires · hopes · fears</text>
+<text x="550" y="164" text-anchor="middle" class="dx-label-sm dx-fill-dim">explains action, reasoning,</text>
+<text x="550" y="178" text-anchor="middle" class="dx-label-sm dx-fill-dim">conversation, motivation</text>
+<line x1="550" y1="195" x2="550" y2="225" class="dx-stroke" stroke-width="1"/>
+<polygon points="550,230 545,221 555,221" class="dx-fill-gold"/>
+<text x="650" y="215" class="dx-label-sm dx-fill-gold">NEUROSCIENCE</text>
+<rect x="425" y="240" width="250" height="80" rx="2" class="dx-stroke" stroke-width="1.5" fill="#1a1815"/>
+<text x="550" y="262" text-anchor="middle" class="dx-eyebrow dx-fill-gold">PREDICTED VERDICT</text>
+<text x="550" y="285" text-anchor="middle" class="dx-title dx-fill-text" font-size="13" font-style="italic">"There are no beliefs."</text>
+<text x="550" y="305" text-anchor="middle" class="dx-label-sm dx-fill-dim">Will be displaced, not reduced.</text>
+<text x="550" y="350" text-anchor="middle" class="dx-label-sm dx-fill-faint">"The common-sense conception of</text>
+<text x="550" y="367" text-anchor="middle" class="dx-label-sm dx-fill-faint">psychological phenomena constitutes</text>
+<text x="550" y="384" text-anchor="middle" class="dx-label-sm dx-fill-faint">a radically false theory..."</text>
+<text x="550" y="401" text-anchor="middle" class="dx-label-sm dx-fill-faint">— P. CHURCHLAND</text>
+<text x="550" y="425" text-anchor="middle" class="dx-label dx-fill-gold" font-size="11" font-style="italic">a relic of inherited language</text>
+<text x="360" y="475" text-anchor="middle" class="dx-label-sm dx-fill-faint">Eliminativism = identity theory's bolder cousin: don't reduce the mental, just delete it.</text>
+</svg>`
+  },
+  {
+    id: 13,
+    eyebrow: 'Lesson 13 — Westphal\'s Critique',
+    title: 'A high bar — and an uneven one',
+    subtitle: 'Westphal pushes back: folk psychology isn\'t really a theory, the "stagnation" charge backfires, and science also leaves much unexplained.',
+    bullets: [
+      '<strong>Reply 1:</strong> folk psychology isn\'t a unified theory but a <em>loose set of concepts</em> — like family, the state, work of art.',
+      '<strong>Reply 2:</strong> arithmetic has "stagnated" for 2,500 years too — 2 + 2 = 4 hasn\'t changed. So what?',
+      '<strong>Reply 3:</strong> mathematics still hasn\'t cracked the Goldbach conjecture, twin primes, the Collatz problem.',
+      '<strong>Reply 4:</strong> science hasn\'t explained <em>sleep, mental illness, creative imagination</em> either — the bar is too high.',
+      '<strong>Reply 5:</strong> "mental illness" is itself a folk-psychological concept — eliminativism would have to throw that out too.'
+    ],
+    hook: 'If folk psychology must be eliminated for failing to explain everything, so must arithmetic — and probably science itself.',
+    diagram: `<svg viewBox="0 0 720 540" xmlns="http://www.w3.org/2000/svg">
+<text x="360" y="28" text-anchor="middle" class="dx-eyebrow dx-fill-faint">CHURCHLAND'S CHARGE · WESTPHAL'S REPLY</text>
+<rect x="60" y="55" width="600" height="70" rx="3" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="360" y="78" text-anchor="middle" class="dx-eyebrow dx-fill-gold">THE CHARGE</text>
+<text x="360" y="100" text-anchor="middle" class="dx-title dx-fill-text" font-size="13" font-style="italic">"Folk psychology has been stagnant for 2,500 years and</text>
+<text x="360" y="118" text-anchor="middle" class="dx-title dx-fill-text" font-size="13" font-style="italic">explains almost nothing." — P. Churchland</text>
+<line x1="360" y1="130" x2="360" y2="148" class="dx-stroke" stroke-width="0.8"/>
+<polygon points="360,153 355,144 365,144" class="dx-fill-gold"/>
+<text x="360" y="170" text-anchor="middle" class="dx-eyebrow dx-fill-gold">FOUR PROBLEMS WITH THE CHARGE</text>
+<rect x="60" y="190" width="290" height="120" rx="3" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="80" y="215" class="dx-title dx-fill-gold" font-size="14">1.</text>
+<text x="105" y="215" class="dx-title dx-fill-text" font-size="13" font-style="italic">Folk psych isn't a theory.</text>
+<text x="80" y="237" class="dx-label-sm dx-fill-dim">It's a loose set of concepts —</text>
+<text x="80" y="253" class="dx-label-sm dx-fill-dim">like "family," "the state," "work of art."</text>
+<text x="80" y="280" class="dx-label-sm dx-fill-faint">Concepts aren't theories.</text>
+<text x="80" y="296" class="dx-label-sm dx-fill-faint">They don't make predictions.</text>
+<rect x="370" y="190" width="290" height="120" rx="3" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="390" y="215" class="dx-title dx-fill-gold" font-size="14">2.</text>
+<text x="415" y="215" class="dx-title dx-fill-text" font-size="13" font-style="italic">Arithmetic has "stagnated" too.</text>
+<text x="390" y="237" class="dx-label-sm dx-fill-dim">2 + 2 = 4 hasn't changed since</text>
+<text x="390" y="253" class="dx-label-sm dx-fill-dim">it was discovered.</text>
+<text x="390" y="280" class="dx-label-sm dx-fill-faint">Should we replace arithmetic</text>
+<text x="390" y="296" class="dx-label-sm dx-fill-faint">with neuroscience too?</text>
+<rect x="60" y="325" width="290" height="120" rx="3" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="80" y="350" class="dx-title dx-fill-gold" font-size="14">3.</text>
+<text x="105" y="350" class="dx-title dx-fill-text" font-size="13" font-style="italic">Math still has unsolved problems.</text>
+<text x="80" y="372" class="dx-label-sm dx-fill-dim">Goldbach · Collatz · twin primes ·</text>
+<text x="80" y="388" class="dx-label-sm dx-fill-dim">odd perfect numbers.</text>
+<text x="80" y="415" class="dx-label-sm dx-fill-faint">Failure to solve everything</text>
+<text x="80" y="431" class="dx-label-sm dx-fill-faint">is not grounds for elimination.</text>
+<rect x="370" y="325" width="290" height="120" rx="3" class="dx-stroke" stroke-width="1" fill="#1a1815"/>
+<text x="390" y="350" class="dx-title dx-fill-gold" font-size="14">4.</text>
+<text x="415" y="350" class="dx-title dx-fill-text" font-size="13" font-style="italic">Science hasn't explained much either.</text>
+<text x="390" y="372" class="dx-label-sm dx-fill-dim">Sleep · mental illness · creative</text>
+<text x="390" y="388" class="dx-label-sm dx-fill-dim">imagination · 3D perception.</text>
+<text x="390" y="415" class="dx-label-sm dx-fill-faint">And "mental illness" itself is a</text>
+<text x="390" y="431" class="dx-label-sm dx-fill-faint">folk-psych concept.</text>
+<rect x="60" y="465" width="600" height="55" rx="3" class="dx-stroke" stroke-width="1.5" fill="#221f1a"/>
+<text x="360" y="490" text-anchor="middle" class="dx-title dx-fill-gold" font-size="14" font-style="italic">"Perhaps we should replace arithmetic with neuroscience,</text>
+<text x="360" y="510" text-anchor="middle" class="dx-title dx-fill-gold" font-size="14" font-style="italic">which has solved all sorts of important problems." — Westphal, ironically</text>
+</svg>`
+  },
+  {
+    id: 14,
+    eyebrow: 'Lesson 14 — Synthesis',
+    title: 'Five solutions, five prices',
+    subtitle: 'Side-by-side: how each physicalist theory denies proposition (1) — and the cost it pays.',
+    bullets: [
+      'Each theory wins by <em>denying that the mind is nonphysical</em>, but each pays a different price.',
+      'The cleanest solutions (eliminativism, hardline behaviorism) are the hardest to believe.',
+      'The most plausible solutions (token-identity, modest functionalism) leave the deep puzzle of <em>qualia</em> unsolved.',
+      'Anomalous monism keeps both worlds — at the cost of explanatory power.',
+      'Westphal\'s diagnosis: <em>"the clear success of a solution seems to stand in inverse relationship to its believability."</em>'
+    ],
+    hook: 'Each theory exchanges credibility for clarity. None pays a small price.',
+    diagram: `<svg viewBox="0 0 720 560" xmlns="http://www.w3.org/2000/svg">
+<text x="360" y="28" text-anchor="middle" class="dx-eyebrow dx-fill-faint">FIVE PHYSICALIST THEORIES · WHAT EACH SAYS · WHAT EACH COSTS</text>
+<line x1="40" y1="65" x2="680" y2="65" class="dx-stroke-dim" stroke-width="0.5"/>
+<text x="50" y="58" class="dx-eyebrow dx-fill-gold">THEORY</text>
+<text x="220" y="58" class="dx-eyebrow dx-fill-gold">THE MOVE</text>
+<text x="430" y="58" class="dx-eyebrow dx-fill-gold">THE COST</text>
+<text x="600" y="58" class="dx-eyebrow dx-fill-gold">VERDICT</text>
+<text x="50" y="98" class="dx-title dx-fill-text" font-size="13" font-style="italic">Behaviorism</text>
+<text x="50" y="115" class="dx-label-sm dx-fill-dim">Ryle · 1949</text>
+<text x="220" y="98" class="dx-label dx-fill-text" font-size="11">Mind = behaviour</text>
+<text x="220" y="113" class="dx-label-sm dx-fill-dim">/ dispositions</text>
+<text x="430" y="98" class="dx-label dx-fill-text" font-size="11">Loses qualia,</text>
+<text x="430" y="113" class="dx-label-sm dx-fill-dim">tautology trap</text>
+<text x="600" y="105" class="dx-label dx-fill-gold" font-size="11" font-style="italic">historical</text>
+<line x1="40" y1="135" x2="680" y2="135" class="dx-stroke-dim" stroke-width="0.3"/>
+<text x="50" y="165" class="dx-title dx-fill-text" font-size="13" font-style="italic">Identity Theory</text>
+<text x="50" y="182" class="dx-label-sm dx-fill-dim">Place · 1956</text>
+<text x="220" y="165" class="dx-label dx-fill-text" font-size="11">Mind = brain</text>
+<text x="220" y="180" class="dx-label-sm dx-fill-dim">(empirical)</text>
+<text x="430" y="165" class="dx-label dx-fill-text" font-size="11">Kripke's necessity,</text>
+<text x="430" y="180" class="dx-label-sm dx-fill-dim">multiple realizability</text>
+<text x="600" y="172" class="dx-label dx-fill-gold" font-size="11" font-style="italic">retreated to tokens</text>
+<line x1="40" y1="202" x2="680" y2="202" class="dx-stroke-dim" stroke-width="0.3"/>
+<text x="50" y="232" class="dx-title dx-fill-text" font-size="13" font-style="italic">Functionalism</text>
+<text x="50" y="249" class="dx-label-sm dx-fill-dim">Putnam · 1967</text>
+<text x="220" y="232" class="dx-label dx-fill-text" font-size="11">Mind = software</text>
+<text x="220" y="247" class="dx-label-sm dx-fill-dim">/ Turing-state</text>
+<text x="430" y="232" class="dx-label dx-fill-text" font-size="11">Qualia, inverted</text>
+<text x="430" y="247" class="dx-label-sm dx-fill-dim">spectrum, triviality</text>
+<text x="600" y="240" class="dx-label dx-fill-gold" font-size="11" font-style="italic">still dominant</text>
+<line x1="40" y1="269" x2="680" y2="269" class="dx-stroke-dim" stroke-width="0.3"/>
+<text x="50" y="299" class="dx-title dx-fill-text" font-size="13" font-style="italic">Anomalous Monism</text>
+<text x="50" y="316" class="dx-label-sm dx-fill-dim">Davidson · 1970</text>
+<text x="220" y="299" class="dx-label dx-fill-text" font-size="11">Events physical,</text>
+<text x="220" y="314" class="dx-label-sm dx-fill-dim">descriptions are not</text>
+<text x="430" y="299" class="dx-label dx-fill-text" font-size="11">No reduction</text>
+<text x="430" y="314" class="dx-label-sm dx-fill-dim">→ no explanation</text>
+<text x="600" y="307" class="dx-label dx-fill-gold" font-size="11" font-style="italic">elegant compromise</text>
+<line x1="40" y1="336" x2="680" y2="336" class="dx-stroke-dim" stroke-width="0.3"/>
+<text x="50" y="366" class="dx-title dx-fill-text" font-size="13" font-style="italic">Eliminativism</text>
+<text x="50" y="383" class="dx-label-sm dx-fill-dim">Churchland · 1981</text>
+<text x="220" y="366" class="dx-label dx-fill-text" font-size="11">There is no mind</text>
+<text x="220" y="381" class="dx-label-sm dx-fill-dim">to begin with</text>
+<text x="430" y="366" class="dx-label dx-fill-text" font-size="11">Self-defeating;</text>
+<text x="430" y="381" class="dx-label-sm dx-fill-dim">deletes the data</text>
+<text x="600" y="373" class="dx-label dx-fill-gold" font-size="11" font-style="italic">extreme · fringe</text>
+<line x1="40" y1="403" x2="680" y2="403" class="dx-stroke-dim" stroke-width="0.5"/>
+<text x="360" y="430" text-anchor="middle" class="dx-eyebrow dx-fill-gold">THE INVERSE LAW</text>
+<line x1="120" y1="490" x2="600" y2="490" class="dx-stroke" stroke-width="0.8"/>
+<line x1="120" y1="490" x2="120" y2="445" class="dx-stroke" stroke-width="0.8"/>
+<text x="120" y="442" text-anchor="middle" class="dx-label-sm dx-fill-dim">↑ believability</text>
+<text x="600" y="505" text-anchor="end" class="dx-label-sm dx-fill-dim">success of solution →</text>
+<line x1="135" y1="455" x2="585" y2="485" stroke="#c9a96e" stroke-width="1.2" stroke-dasharray="3 3"/>
+<circle cx="160" cy="458" r="3" class="dx-fill-gold"/>
+<text x="160" y="478" text-anchor="middle" class="dx-label-sm dx-fill-text" font-size="9">Anom. monism</text>
+<circle cx="280" cy="468" r="3" class="dx-fill-gold"/>
+<text x="280" y="478" text-anchor="middle" class="dx-label-sm dx-fill-text" font-size="9">Functionalism</text>
+<circle cx="400" cy="475" r="3" class="dx-fill-gold"/>
+<text x="400" y="478" text-anchor="middle" class="dx-label-sm dx-fill-text" font-size="9">Identity</text>
+<circle cx="500" cy="481" r="3" class="dx-fill-gold"/>
+<text x="500" y="478" text-anchor="middle" class="dx-label-sm dx-fill-text" font-size="9">Behaviorism</text>
+<circle cx="575" cy="485" r="3" class="dx-fill-gold"/>
+<text x="575" y="478" text-anchor="middle" class="dx-label-sm dx-fill-text" font-size="9">Eliminativism</text>
+<text x="360" y="535" text-anchor="middle" class="dx-title dx-fill-text" font-size="13" font-style="italic">"The clear success of a solution seems to stand in inverse relationship to its believability."</text>
+</svg>`
+  }
+];
+
+
+const FLASHCARDS = [
+  { topic: 'Behaviorism', q: 'What is the core thesis of behaviorism?', a: '<strong>The mental IS the behavioral.</strong> Mind is behavior — the body considered from the point of view of its behavior.' },
+  { topic: 'Behaviorism', q: 'What are the four forms of behaviorism (in order of radicality)?', a: '1. Hardline (no mind exists). 2. Methodological (don\'t study what can\'t be observed). 3. Replacement (mind isn\'t interesting). 4. <strong>Translation</strong> (mental sentences = sentences about behavioral dispositions).' },
+  { topic: 'Behaviorism', q: 'Which book introduced logical / translation behaviorism?', a: 'Gilbert Ryle\'s <strong>The Concept of Mind</strong> (1949). Ryle himself: "one of my feet was pretty firmly encased in this boot."' },
+  { topic: 'Behaviorism', q: 'In Ryle\'s view, what does "I am tired" really refer to?', a: 'Not a private inner feeling of drowsiness, but a <strong>cluster of behavioral dispositions</strong>: stop work, lie down, close eyes, rest.' },
+  { topic: 'Behaviorism', q: 'What is the "problem of absent qualia"?', a: 'A machine could behave just like us toward red things — picking, eating, labeling — without having <strong>any color experience</strong>. Behavior alone misses the experience.' },
+  { topic: 'Behaviorism', q: 'What is the inverted spectrum problem?', a: 'Two people could behave <strong>identically</strong> while having systematically <strong>reversed color experiences</strong>. Behavior cannot capture qualia.' },
+  { topic: 'Behaviorism', q: 'What is behaviorism\'s "tautology trap"?', a: 'If a mental state IS a disposition to behave, then "the mental state explains the behavior" reduces to <strong>"the disposition explains the behavior"</strong> — trivially circular.' },
+  { topic: 'Behaviorism', q: 'What does Wittgenstein\'s "beetle in the box" actually argue?', a: 'NOT that sensations don\'t exist. The argument concerns <strong>meaning</strong>: a private word with no public check would not function as a meaningful term. Wittgenstein is <em>not</em> a hardline behaviorist.' },
+  { topic: 'Identity Theory', q: 'Who launched the identity theory and when?', a: '<strong>U. T. Place</strong> in his 1956 paper. Mental events are physiological events in the central nervous system.' },
+  { topic: 'Identity Theory', q: 'What is "central-state" materialism, and what does it contrast with?', a: 'Central-state = <strong>identity theory</strong> (mind is the brain / CNS). It contrasts with the <strong>peripheral-state</strong> materialism of behaviorism (mind is bodily behavior).' },
+  { topic: 'Identity Theory', q: 'Why does "mind" not <em>mean</em> "brain" for identity theorists?', a: 'It would make the theory a trivial dictionary truth. Mind=brain is an <strong>empirical identity</strong>, like the discovery that gene = DNA — the words mean different things but refer to the same item.' },
+  { topic: 'Identity Theory', q: 'What did Francis Crick call the identity theory in 1994?', a: 'The "<strong>astonishing hypothesis</strong>" — though Westphal notes it isn\'t really very astonishing, given the neurological evidence.' },
+  { topic: 'Identity Theory', q: 'Summarize Kripke\'s 1970 argument against the identity theory.', a: 'If a = b, and a is necessarily a, then by substitution <strong>a is necessarily b</strong>. So identity is <strong>always necessary</strong>. But identity theorists wanted mind=brain to be contingent — contradiction.' },
+  { topic: 'Identity Theory', q: 'What is a "rigid designator"?', a: 'A name that refers to the <strong>same object in every possible world</strong>. "Elizabeth II" is rigid; "the Queen" is a description that can refer to different people. "Pain" and "C-fibre firing" are rigid.' },
+  { topic: 'Identity Theory', q: 'Distinguish type-identity and token-identity.', a: '<strong>Type-identity:</strong> the kind "pain" = the kind "C-fibre firing" (strong, requires same brain state for every pain). <strong>Token-identity:</strong> this particular pain = this particular brain event (weaker, allows different physical bases).' },
+  { topic: 'Identity Theory', q: 'How does the Cello Concerto example illustrate type/token?', a: 'Elgar wrote <strong>one</strong> Cello Concerto (the type), but it has been performed hundreds of times — each performance is a token. One type, many tokens.' },
+  { topic: 'Functionalism', q: 'Who founded functionalism and in what paper?', a: '<strong>Hilary Putnam</strong> in "Psychological Predicates" (1967), later renamed "The Nature of Mental States."' },
+  { topic: 'Functionalism', q: 'What is a Turing-machine state in functionalism?', a: 'A <strong>computational / functional</strong> state defined by inputs, outputs, and internal transitions — not by physical material. The mind, on functionalism, is a Turing-machine state.' },
+  { topic: 'Functionalism', q: 'What is the multiple realizability thesis?', a: '<strong>One mental state can be realized in multiple, very different physical ways.</strong> Goats, birds, reptiles, mollusks all feel pain, but they cannot share the same brain state.' },
+  { topic: 'Functionalism', q: 'How does the hardware/software distinction illuminate functionalism?', a: 'Mind = <strong>software</strong> (a computational pattern); brain = <strong>hardware</strong>. The same multiplication 7×9=63 can run on electronic, optical, or biological hardware — same function, different physics.' },
+  { topic: 'Functionalism', q: 'How does functionalism stumble over qualia?', a: 'Two systems in <strong>identical functional states</strong> could have inverted spectra inside — same role, different experience. A Turing machine "computes about red" without having any idea what red is.' },
+  { topic: 'Functionalism', q: 'What did Putnam recant in 1991?', a: 'Putnam argued that <strong>any computational description applies to any physical thing</strong>, making functionalism trivial. He turned against his own former functionalist self.' },
+  { topic: 'Functionalism', q: 'In what sense might functionalism be a property dualism?', a: 'If functional / computational properties are <strong>not strictly physical</strong>, the brain has both physical and nonphysical properties — which is property dualism by another name.' },
+  { topic: 'Anomalous Monism', q: 'Who developed anomalous monism and where?', a: '<strong>Donald Davidson</strong> in "Mental Events" (1970).' },
+  { topic: 'Anomalous Monism', q: 'What is anomalous monism\'s core claim?', a: 'Events themselves are <strong>physical</strong> (monism), but mental <strong>descriptions</strong> are irreducible to physical ones (anomalous — no strict laws). One world, two vocabularies.' },
+  { topic: 'Anomalous Monism', q: 'Distinguish brightness from luminance.', a: '<strong>Luminance</strong> is physical — radiation per unit area, measured in cd/m². <strong>Brightness</strong> is psychological — how bright a colour appears, determinable only by direct observation.' },
+  { topic: 'Anomalous Monism', q: 'Why is yellow being a "bright" color a useful example for Davidson?', a: 'Brightness is not a concept found in physics; it lives in <strong>psychology</strong>. The same surface has a physical luminance description AND an irreducible psychological brightness description.' },
+  { topic: 'Eliminativism', q: 'Who are the leading eliminativists?', a: '<strong>Paul and Patricia Churchland</strong>, and <strong>Stephen Stich</strong>.' },
+  { topic: 'Eliminativism', q: 'What is "folk psychology" according to its eliminativist critics?', a: 'The everyday talk of <strong>beliefs, desires, hopes, fears</strong> — taken by eliminativists to be a <strong>theory</strong> ("theory theory") that makes predictions, and a radically false one.' },
+  { topic: 'Eliminativism', q: 'Explain the witches analogy.', a: 'Witches were not <strong>reduced</strong> to chemistry; they were <strong>eliminated</strong> as a product of superstition. Likewise, hopes/fears/beliefs will be eliminated, not reduced, by completed neuroscience.' },
+  { topic: 'Eliminativism', q: 'Quote the Churchland line on folk psychology.', a: 'Folk psychology "constitutes a <strong>radically false theory</strong>, a theory so fundamentally defective that both the principles and the ontology of that theory will eventually be displaced, rather than smoothly reduced, by a completed neuroscience."' },
+  { topic: 'Eliminativism', q: 'How does Davidson differ from eliminativists on folk psychology?', a: 'Davidson agrees folk psych is irreducible, but holds it is <strong>descriptive, not a theory</strong>. Eliminativists hold it IS a theory — and a false one to be eliminated.' },
+  { topic: 'Eliminativism', q: 'Summarize Westphal\'s main critique of eliminativism.', a: 'Folk psych isn\'t a theory but a <strong>loose set of concepts</strong>. Arithmetic has "stagnated" too (so what?). Math hasn\'t solved Goldbach or twin primes. Science hasn\'t explained sleep or mental illness either. The bar is too high.' },
+  { topic: 'Eliminativism', q: 'Why does Westphal note that "mental illness" is awkward for eliminativists?', a: '"Mental illness" is itself a <strong>folk-psychological concept</strong>. If folk psych is radically false, then strictly speaking <em>nobody has mental illnesses</em> — an unwelcome conclusion for the eliminativist.' },
+  { topic: 'Synthesis', q: 'What is Westphal\'s closing observation about all five physicalist solutions?', a: '"<strong>The clear success of a solution seems to stand in inverse relationship to its believability.</strong>" The cleanest solutions are the hardest to believe; the most believable solutions leave the puzzle of qualia unsolved.' }
+];
+
+const MCQ = [
+  { q: 'What is the basic thesis of behaviorism?',
+    options: ['The mind is identical to the brain', 'The mental is the behavioral', 'The mind is a Turing-machine state', 'There are no mental events at all'],
+    correct: 1,
+    explanation: 'Behaviorism\'s core thesis is that <strong>the mental is the behavioral</strong> — the mind is the body considered from the point of view of its behavior. Option D describes only the most extreme (hardline) version.'
+  },
+  { q: 'Which behaviorist version is most associated with Gilbert Ryle?',
+    options: ['Hardline behaviorism — there is no mind', 'Methodological behaviorism — only study the observable', 'Translation / dispositional behaviorism', 'Indifferentist behaviorism — mind isn\'t interesting'],
+    correct: 2,
+    explanation: 'Ryle\'s <em>Concept of Mind</em> (1949) developed the <strong>translation view</strong>: mental sentences translate into sentences about behavioral dispositions.'
+  },
+  { q: 'The "problem of absent qualia" threatens behaviorism by showing that:',
+    options: ['Brains cannot produce behavior', 'A system could exhibit identical behavior without any conscious experience', 'Different individuals behave differently', 'Behavior is unobservable'],
+    correct: 1,
+    explanation: 'A machine could pick, eat, and label red things just as we do <strong>without any color experience</strong>. If behavior alone constituted mind, this would be impossible.'
+  },
+  { q: 'The tautology problem for behaviorism arises because:',
+    options: ['Behavior does not exist', 'Explaining behavior by a "disposition to behave" becomes circular and trivial', 'Mental states cannot be dispositions', 'Behaviorism contradicts itself directly'],
+    correct: 1,
+    explanation: 'If a mental state IS a disposition to behave, then "the mental state explains the behavior" reduces to <strong>"the disposition to behave explains that behavior"</strong> — trivial.'
+  },
+  { q: 'The identity theory was launched by:',
+    options: ['Gilbert Ryle in 1949', 'U. T. Place in 1956', 'Hilary Putnam in 1967', 'Donald Davidson in 1970'],
+    correct: 1,
+    explanation: '<strong>U. T. Place\'s 1956 paper</strong> launched the mind-brain identity theory. American and Australian philosophers developed it through the late 1950s and 1960s.'
+  },
+  { q: '"Central-state" materialism is contrasted with which other position?',
+    options: ['Property dualism', 'Idealism', 'Peripheral-state materialism (i.e. behaviorism)', 'Functionalism'],
+    correct: 2,
+    explanation: 'The label distinguishes the identity theory (mind = central nervous system) from <strong>behaviorism</strong>, which locates the mental in peripheral bodily behavior.'
+  },
+  { q: 'Why is the claim "mind = brain" NOT taken to be a definitional truth by identity theorists?',
+    options: ['Because brains do not exist', 'Because the words don\'t mean the same thing — it is an empirical claim like "gene = DNA"', 'Because there are multiple brains', 'Because the mind is software'],
+    correct: 1,
+    explanation: 'Identity theorists treat mind=brain as an <strong>empirical / scientific identity</strong>, like the discovery that gene = DNA. The words mean different things but refer to the same thing.'
+  },
+  { q: 'What is the conclusion of Kripke\'s argument against the identity theory?',
+    options: ['Brains do not exist', 'Identity statements between rigid designators are necessary, conflicting with "contingent identity" claims', 'Mental states are dispositions', 'Functionalism is true'],
+    correct: 1,
+    explanation: 'If a = b, then by substitution into "□(a=a)" we get "□(a=b)". So identity is always necessary when both terms are rigid designators. Identity theorists wanted mind=brain to be <em>contingent</em> — contradiction.'
+  },
+  { q: 'Which of the following is a rigid designator?',
+    options: ['"The Queen of England"', '"The president of France"', '"Elizabeth II"', '"The capital city"'],
+    correct: 2,
+    explanation: '<strong>"Elizabeth II"</strong> is a name that refers to the same person in every possible world. The other options are descriptions that can apply to different individuals.'
+  },
+  { q: 'The type / token distinction is illustrated by:',
+    options: ['A car and its driver', 'Elgar\'s Cello Concerto (type) and its many performances (tokens)', 'A mind and a body', 'A cause and its effect'],
+    correct: 1,
+    explanation: 'There is <strong>one</strong> Cello Concerto (the type — the abstract work Elgar composed) but <strong>many</strong> performance tokens. Same trick: pain-type vs. this particular pain-token.'
+  },
+  { q: 'How does token-identity differ from type-identity?',
+    options: ['It denies that mental states exist', 'It claims each particular mental event is identical to some particular brain event, without requiring all pains to be the same brain state', 'It is the same view', 'It requires a soul'],
+    correct: 1,
+    explanation: 'Token-identity is <strong>weaker and more flexible</strong>: this pain = this brain event, but two organisms in pain need not be in the same brain state. This accommodates multiple realizability.'
+  },
+  { q: 'Putnam\'s functionalism compares the mind to:',
+    options: ['A behavior pattern', 'A specific brain organ', 'The software running on a Turing machine', 'A nonphysical substance'],
+    correct: 2,
+    explanation: 'Functionalism treats mental states as <strong>computational / Turing-machine states</strong> — defined by their causal role and input-output mappings, not by physical substrate.'
+  },
+  { q: 'The multiple realizability thesis claims:',
+    options: ['The same mental state can be realized by very different physical systems', 'People realize multiple thoughts at once', 'Reality has multiple layers', 'Brains have multiple regions'],
+    correct: 0,
+    explanation: 'Goats, birds, reptiles, and mollusks all feel pain — yet have radically different nervous systems. <strong>One mental state, many physical realizations.</strong>'
+  },
+  { q: 'Why does functionalism inherit a qualia problem?',
+    options: ['Functions cannot compute', 'Two systems in identical functional states could have inverted or absent experiences', 'Qualia don\'t exist', 'Functionalism is too physical'],
+    correct: 1,
+    explanation: 'Two robots could share an <strong>identical Turing-machine state</strong> while having spectra inverted relative to one another inside. Same function, different qualia — so qualia cannot be the function.'
+  },
+  { q: 'Putnam\'s 1991 reason for rejecting his own functionalism was that:',
+    options: ['Mental states are physical after all', 'Any computational description can be applied to any physical thing, making functionalism trivial', 'Qualia are real', 'The brain is too complex'],
+    correct: 1,
+    explanation: 'Putnam argued that <strong>any computational description applies to any physical thing</strong> — so mental states being computational tells us nothing distinctive. Functionalism collapses into triviality.'
+  },
+  { q: 'According to anomalous monism, mental descriptions are:',
+    options: ['Reducible to physical descriptions', 'Irreducible to physical descriptions', 'Identical to physical descriptions', 'Meaningless'],
+    correct: 1,
+    explanation: 'Davidson holds that events are physical (monism) but mental <strong>descriptions / vocabulary</strong> cannot be reduced to or defined by physical terms (anomaly).'
+  },
+  { q: 'The brightness / luminance distinction shows that:',
+    options: ['Both are physical concepts', 'Brightness is psychological while luminance is physical', 'Both are psychological', 'Yellow isn\'t bright'],
+    correct: 1,
+    explanation: '<strong>Luminance</strong> is the narrowly physical, measurable quantity (cd/m²). <strong>Brightness</strong> is determined only by direct observation — a psychological concept.'
+  },
+  { q: 'Eliminativism claims that folk psychology:',
+    options: ['Is broadly correct but incomplete', 'Needs reform', 'Is a radically false theory that will be displaced, not reduced', 'Is a useful approximation'],
+    correct: 2,
+    explanation: 'Churchland: folk psychology "constitutes a <strong>radically false theory</strong>...will eventually be <strong>displaced, rather than smoothly reduced</strong>, by a completed neuroscience."'
+  },
+  { q: 'The "witches" analogy in eliminativism suggests:',
+    options: ['Witches were real', 'Hopes and fears will be eliminated like witches were, not reduced to science', 'Science is wrong about witches', 'Folk psychology is magical'],
+    correct: 1,
+    explanation: 'Witches were not <strong>reduced</strong> to chemistry — they were <strong>eliminated</strong> as a product of superstition. Eliminativists predict the same fate for hopes, fears, beliefs, desires.'
+  },
+  { q: 'Westphal\'s closing observation about solutions to the mind-body problem:',
+    options: ['The most believable solutions work best', 'Successful solutions tend to be the least believable', 'All solutions fail equally', 'The problem has no solution'],
+    correct: 1,
+    explanation: '"<strong>The clear success of a solution seems to stand in inverse relationship to its believability.</strong>" Cleanest solutions are hardest to believe; most believable ones leave qualia unsolved.'
+  }
+];
+
+/* ============================================================
+   APPLICATION LOGIC
+   ============================================================ */
+
+const ALL_LESSONS = LESSONS.concat(LESSONS_PART2);
+let currentLesson = 0;
+let currentFilter = 'All';
+let flashDeck = FLASHCARDS.slice();
+let currentFlash = 0;
+let currentMcq = 0;
+let mcqAnswered = 0;
+let mcqCorrect = 0;
+let mcqAnswers = {};
+
+function $(s) { return document.querySelector(s); }
+function $$(s) { return document.querySelectorAll(s); }
+
+/* PANEL SWITCHING */
+$$('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const panel = btn.dataset.panel;
+    $$('.nav-btn').forEach(b => b.classList.remove('active'));
+    $$('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    $('#panel-' + panel).classList.add('active');
+    $('.main').scrollTop = 0;
+  });
+});
+
+/* OVERVIEW GRID */
+function renderOverview() {
+  const grid = $('#overview-grid');
+  grid.innerHTML = ALL_LESSONS.map((l, i) => `
+    <div class="lesson-card" data-lesson="${i}">
+      <div class="num">Lesson ${String(l.id).padStart(2, '0')}</div>
+      <div class="title">${l.title}</div>
+      <div class="blurb">${l.subtitle}</div>
+      <div class="topic-tag">${l.eyebrow.split('—')[1] ? l.eyebrow.split('—')[1].trim() : 'Theory'}</div>
+    </div>
+  `).join('');
+  $$('.lesson-card').forEach(card => {
+    card.addEventListener('click', () => {
+      currentLesson = parseInt(card.dataset.lesson);
+      renderLesson();
+      $$('.nav-btn').forEach(b => b.classList.remove('active'));
+      $$('.panel').forEach(p => p.classList.remove('active'));
+      $('.nav-btn[data-panel="lessons"]').classList.add('active');
+      $('#panel-lessons').classList.add('active');
+      $('.main').scrollTop = 0;
+    });
+  });
+}
+
+/* LESSON RENDER */
+function renderLesson() {
+  const l = ALL_LESSONS[currentLesson];
+  $('#lesson-title-display').textContent = l.title;
+  $('#lesson-subtitle-display').textContent = l.subtitle;
+  $('#lesson-counter').textContent = `Lesson ${currentLesson + 1} of ${ALL_LESSONS.length}`;
+  $('#prev-lesson').disabled = currentLesson === 0;
+  $('#next-lesson').disabled = currentLesson === ALL_LESSONS.length - 1;
+  $('#lesson-content').innerHTML = `
+    <div class="lesson-diagram">${l.diagram}</div>
+    <div class="lesson-side">
+      <div class="lesson-eyebrow">${l.eyebrow}</div>
+      <h2>${l.title}</h2>
+      <ul class="lesson-bullets">
+        ${l.bullets.map(b => `<li>${b}</li>`).join('')}
+      </ul>
+      <div class="memory-hook">
+        <div class="hook-label">Memory Hook</div>
+        <p>${l.hook}</p>
+      </div>
+    </div>`;
+}
+$('#prev-lesson').addEventListener('click', () => {
+  if (currentLesson > 0) { currentLesson--; renderLesson(); $('.main').scrollTop = 0; }
+});
+$('#next-lesson').addEventListener('click', () => {
+  if (currentLesson < ALL_LESSONS.length - 1) { currentLesson++; renderLesson(); $('.main').scrollTop = 0; }
+});
+
+/* FLASHCARDS */
+function renderFilters() {
+  const topics = ['All', ...new Set(FLASHCARDS.map(c => c.topic))];
+  $('#flash-filters').innerHTML = topics.map(t =>
+    `<button class="filter-btn ${t === currentFilter ? 'active' : ''}" data-topic="${t}">${t}</button>`
+  ).join('');
+  $$('#flash-filters .filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentFilter = btn.dataset.topic;
+      flashDeck = currentFilter === 'All' ? FLASHCARDS.slice() : FLASHCARDS.filter(c => c.topic === currentFilter);
+      currentFlash = 0;
+      renderFilters();
+      renderFlashcard();
+    });
+  });
+}
+function renderFlashcard() {
+  if (flashDeck.length === 0) return;
+  const c = flashDeck[currentFlash];
+  $('#flashcard').classList.remove('flipped');
+  $('#flash-tag-front').textContent = c.topic.toUpperCase();
+  $('#flash-tag-back').textContent = c.topic.toUpperCase();
+  $('#flash-q').innerHTML = c.q;
+  $('#flash-a').innerHTML = c.a;
+  $('#flash-num-front').textContent = `${currentFlash + 1} / ${flashDeck.length}`;
+  $('#flash-num-back').textContent = `${currentFlash + 1} / ${flashDeck.length}`;
+  $('#flash-progress').textContent = `Card ${currentFlash + 1} of ${flashDeck.length}`;
+}
+$('#flashcard').addEventListener('click', () => $('#flashcard').classList.toggle('flipped'));
+$('#flash-flip').addEventListener('click', e => { e.stopPropagation(); $('#flashcard').classList.toggle('flipped'); });
+$('#flash-prev').addEventListener('click', () => {
+  currentFlash = (currentFlash - 1 + flashDeck.length) % flashDeck.length;
+  renderFlashcard();
+});
+$('#flash-next').addEventListener('click', () => {
+  currentFlash = (currentFlash + 1) % flashDeck.length;
+  renderFlashcard();
+});
+$('#shuffle-btn').addEventListener('click', () => {
+  for (let i = flashDeck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [flashDeck[i], flashDeck[j]] = [flashDeck[j], flashDeck[i]];
+  }
+  currentFlash = 0;
+  renderFlashcard();
+});
+$('#reset-btn').addEventListener('click', () => {
+  currentFilter = 'All';
+  flashDeck = FLASHCARDS.slice();
+  currentFlash = 0;
+  renderFilters();
+  renderFlashcard();
+});
+
+/* MCQ */
+function renderMcq() {
+  $('#mcq-progress-fill').style.width = (mcqAnswered / MCQ.length * 100) + '%';
+  $('#mcq-counter').textContent = `Question ${currentMcq + 1} of ${MCQ.length}`;
+  $('#mcq-score').textContent = `Score: ${mcqCorrect} / ${mcqAnswered}`;
+  if (currentMcq >= MCQ.length) {
+    renderMcqSummary();
+    return;
+  }
+  const q = MCQ[currentMcq];
+  const letters = ['A', 'B', 'C', 'D'];
+  const previouslyAnswered = mcqAnswers[currentMcq] !== undefined;
+  $('#mcq-stage').innerHTML = `
+    <div class="mcq-question">
+      <div class="mcq-q-text">${q.q}</div>
+      <div class="mcq-options">
+        ${q.options.map((opt, i) => `
+          <button class="mcq-option" data-idx="${i}" ${previouslyAnswered ? 'disabled' : ''}>
+            <span class="letter">${letters[i]}</span>
+            <span>${opt}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div class="mcq-feedback" id="mcq-feedback"></div>
+    </div>
+    <div class="mcq-controls">
+      <button class="action-btn ghost" id="mcq-prev" ${currentMcq === 0 ? 'disabled' : ''}>← Previous</button>
+      <button class="action-btn" id="mcq-next" ${!previouslyAnswered ? 'disabled' : ''}>${currentMcq === MCQ.length - 1 ? 'See results' : 'Next question →'}</button>
+    </div>
+  `;
+  if (previouslyAnswered) {
+    showMcqFeedback(mcqAnswers[currentMcq]);
+  }
+  $$('#mcq-stage .mcq-option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.dataset.idx);
+      mcqAnswers[currentMcq] = idx;
+      mcqAnswered = Object.keys(mcqAnswers).length;
+      mcqCorrect = Object.entries(mcqAnswers).filter(([k, v]) => MCQ[k].correct === v).length;
+      $$('#mcq-stage .mcq-option').forEach(b => b.disabled = true);
+      showMcqFeedback(idx);
+      $('#mcq-next').disabled = false;
+      $('#mcq-progress-fill').style.width = (mcqAnswered / MCQ.length * 100) + '%';
+      $('#mcq-score').textContent = `Score: ${mcqCorrect} / ${mcqAnswered}`;
+    });
+  });
+  $('#mcq-prev').addEventListener('click', () => {
+    if (currentMcq > 0) { currentMcq--; renderMcq(); $('.main').scrollTop = 0; }
+  });
+  $('#mcq-next').addEventListener('click', () => {
+    currentMcq++;
+    renderMcq();
+    $('.main').scrollTop = 0;
+  });
+}
+function showMcqFeedback(selectedIdx) {
+  const q = MCQ[currentMcq];
+  const isCorrect = selectedIdx === q.correct;
+  $$('#mcq-stage .mcq-option').forEach((btn, i) => {
+    if (i === q.correct) btn.classList.add('correct');
+    else if (i === selectedIdx) btn.classList.add('incorrect');
+  });
+  const fb = $('#mcq-feedback');
+  fb.innerHTML = `
+    <div class="verdict">${isCorrect ? '✓ Correct' : '✗ Not quite'}</div>
+    ${q.explanation}
+  `;
+  fb.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+}
+function renderMcqSummary() {
+  const pct = Math.round(mcqCorrect / MCQ.length * 100);
+  let verdict = '';
+  if (pct >= 90) verdict = 'Outstanding — exam-ready.';
+  else if (pct >= 75) verdict = 'Strong grasp. Worth one more pass.';
+  else if (pct >= 60) verdict = 'Solid foundation — review the missed concepts.';
+  else verdict = 'Worth re-reading the lessons before retrying.';
+  $('#mcq-stage').innerHTML = `
+    <div class="mcq-summary">
+      <h3>Quiz Complete</h3>
+      <div class="score-num">${mcqCorrect}<span>/${MCQ.length}</span></div>
+      <p>${pct}% · ${verdict}</p>
+      <button class="action-btn" id="mcq-restart">Restart quiz</button>
+    </div>
+  `;
+  $('#mcq-progress-fill').style.width = '100%';
+  $('#mcq-restart').addEventListener('click', () => {
+    currentMcq = 0; mcqAnswered = 0; mcqCorrect = 0; mcqAnswers = {};
+    renderMcq();
+    $('.main').scrollTop = 0;
+  });
+}
+
+/* INIT */
+renderOverview();
+renderLesson();
+renderFilters();
+renderFlashcard();
+renderMcq();
+
+</script>
+</body>
+</html>
